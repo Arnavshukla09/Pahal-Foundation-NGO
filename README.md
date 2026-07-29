@@ -1,114 +1,84 @@
-# Pahal Foundation NGO Web Application ✨
+# Pahal Foundation VITB
 
-Welcome to the official repository for the Pahal Foundation's web application. This platform is a comprehensive tool designed to support the foundation's mission of empowering underprivileged students by providing educational resources, managing operations, and fostering a community of support.
+Welcome to the official repository for the **Pahal Foundation VITB** web application. This platform is a modern, comprehensive tool designed to support the foundation's mission of empowering underprivileged students—particularly the children of workers at VIT Bhopal—by providing educational resources, managing operations, and fostering a community of support.
 
-Website link - [pahal-foundation-ngo.vercel.app](https://pahal-foundation-ngo-git-master-arnavshukla0925-2353s-projects.vercel.app)
+**Live Website**: [pahal-foundation-ngo.vercel.app](https://pahal-foundation-ngo.vercel.app/)
 
-## 🌟 About
+## 🌟 About the Foundation
 
-Pahal Foundation is a non-profit organization committed to empowering underprivileged students, particularly the children of workers at VIT Bhopal. Our mission is to provide quality education and ensure their well-being through various initiatives. This web application serves as a central hub for our activities, helping us manage our programs, connect with volunteers, and engage with our community.
+Pahal Foundation is a non-profit organization committed to empowering underprivileged students. We believe every child deserves access to education. Together, we nurture dreams and build brighter futures through digital literacy workshops, scholarship funds, community awareness events, and daily schooling.
+
+This web application serves as our digital headquarters—handling everything from public engagement and donations to internal volunteer and student management.
 
 ## 🚀 Key Features
 
--   **Homepage:** A welcoming landing page with an image slider, mission statement, and key statistics to showcase our impact.
--   **User Authentication:** Secure login and registration system for staff and administrators.
--   **Donation Portal:** Integrated with Razorpay for seamless and secure online donations.
--   **Content Management:**
-    -   **Blog/Forum:** A platform for teachers and admins to create, edit, and publish articles. Includes a rich text editor and a commenting system for community engagement.
--   **Student Management System:**
-    -   **Admissions:** An easy-to-use form for enrolling new students.
-    -   **Student Database:** A central place to view and manage detailed student information.
-    -   **Attendance Tracking:** Functionality for teachers to take and record daily attendance.
--   **Volunteer Management:**
-    -   **Enrollment:** A dedicated form for new volunteers to register and join our cause.
-    -   **Volunteer Database:** A directory of all volunteers and their information.
--   **Role-Based Access Control:**
-    -   **Admin Dashboard:** Provides full access to all management features, including student and volunteer data, content management, and site settings.
-    -   **Teacher Dashboard:** A tailored dashboard for teachers to manage their students, take attendance, and contribute to the blog.
--   **Responsive Design:** Ensures a seamless experience across desktops, tablets, and mobile devices.
+### Public Portal
+- **Modern Landing Page:** A welcoming interface featuring our mission statement, real-time statistics, and our upcoming events.
+- **Secure Donations:** A dedicated donation portal designed to facilitate secure online contributions to our causes.
+- **Community Forum:** A public-facing blog/forum where educators, volunteers, and admins can publish updates, share thoughts, and engage with the community.
+- **Volunteer Registration:** A seamless onboarding form for passionate individuals to join our movement.
 
-## 🖼️ Screenshots
+### Internal Dashboard (Role-Based Access)
+- **Teacher Portal:** A tailored, secure dashboard for educators to manage their assigned students, take daily attendance, and contribute to the community forum.
+- **Admin Management:** Full access to site settings, encompassing volunteer tracking, student admissions, and complete database oversight.
+- **Student Information System:** Centralized tracking of enrolled students, their attendance records, and educational progress.
 
-| Homepage | Volunteer Page |
-| :---: |:---:|
-| ![Homepage](screenshots/Screenshot%20(33).png) | ![Volunteer page](screenshots/Screenshot%20(35).png) |
-| **Donation Page** | **Dashboard** |
-| ![Donation page](screenshots/Screenshot%20(36).png) | ![Dashboard](screenshots/Screenshot%20(37).png) |
+## 🛠️ Technology Stack
 
-## 🛠️ Tech Stack
+Our platform is built to be fast, scalable, and responsive:
 
-* **Backend:** Python, Django
-* **Frontend:** HTML, CSS, JavaScript
-* **Database:** SQLite (Configured to run in `/tmp` for Vercel's Serverless environment)
-* **File Storage:** AWS S3 for media files (Optional/Configurable)
-* **Payment Gateway:** RazorPay (Optional/Configurable)
-* **Deployment:** Git, GitHub, **Vercel**
+* **Backend:** Python & Django (providing a robust framework for authentication, routing, and data modeling)
+* **Frontend:** HTML5, Vanilla CSS3, & JavaScript (utilizing a modern crimson & white design system with frosted-glass UI elements)
+* **Database:** SQLite (Dynamically configured to run in `/tmp` for Vercel's serverless environment)
+* **Deployment:** Vercel (CI/CD connected directly to GitHub)
+* **Design Aesthetics:** Animate.css for micro-interactions, FontAwesome for iconography, and Google Fonts (Inter & Outfit) for premium typography.
 
 ## 📂 Project Structure
 
-The project is organized into two main Django apps: `pahal` for the public-facing site and user authentication, and `content` for the internal dashboard and content management.
+The project is structured entirely within Django, separated into two core apps:
+- `pahal`: Manages public-facing views (Home, About, Contact, Donate) and secure Authentication (Login, Signup, Password Management).
+- `content`: Manages the internal Dashboard, Student/Volunteer data structures, and the Community Forum / Blogs.
 
-```
+```text
 Pahal-Foundation-NGO/
 ├── .env.example
 ├── .gitignore
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
 ├── README.md
-├── build_files.sh
-├── requirements.txt
-├── vercel.json
-├── screenshots/
-└── PahalFoundation/
-    ├── db.sqlite3
+├── build_files.sh          # Vercel deployment script
+├── requirements.txt        # Python dependencies
+├── vercel.json             # Vercel serverless routing configuration
+└── PahalFoundation/        # Django Root
+    ├── db.sqlite3          # Ephemeral SQLite database (for demo purposes)
     ├── manage.py
-    ├── requirements.txt
-    ├── seed_demo_data.py
-    ├── PahalFoundation/
-    │   ├── __init__.py
-    │   ├── asgi.py
-    │   ├── settings.py
-    │   ├── urls.py
-    │   └── wsgi.py
-    ├── content/
-    │   ├── models.py
-    │   ├── views.py
-    │   ├── urls.py
-    │   ├── forms.py
-    │   ├── static/content/
-    │   └── templates/content/
-    └── pahal/
-        ├── models.py
-        ├── views.py
-        ├── urls.py
-        ├── static/pahal/
-        └── templates/pahal/
+    ├── seed_demo_data.py   # Script to populate demo data
+    ├── PahalFoundation/    # Django Settings
+    ├── content/            # Dashboard & Forum App
+    └── pahal/              # Public Site & Auth App
 ```
 
 ## 🚀 Deploying to Vercel
 
-1. Fork / clone this repository
-2. Go to [vercel.com](https://vercel.com) → New Project → Import from GitHub
-3. Select this repository and do NOT override the Root Directory (keep it as default)
-4. Add the following **Environment Variables** in Vercel project settings (optional depending on your setup):
+This repository is pre-configured for seamless deployment to Vercel.
 
-| Variable | Description |
-|---|---|
-| `DJANGO_SECRET_KEY` | Django secret key |
-| `DEBUG` | Set to `False` |
-| `AWS_ACCESS_KEY_ID` | AWS S3 access key (optional) |
-| `AWS_SECRET_ACCESS_KEY` | AWS S3 secret key (optional) |
-| `AWS_STORAGE_BUCKET_NAME` | S3 bucket name (optional) |
-| `RAZORPAY_API_KEY` | Razorpay key (optional) |
-| `RAZORPAY_API_SECRET` | Razorpay secret (optional) |
+1. Fork or clone this repository to your GitHub account.
+2. Go to [vercel.com](https://vercel.com) → **Add New Project** → Import from GitHub.
+3. Select this repository. **Do NOT override the Root Directory** (leave it blank/default).
+4. Vercel will automatically detect the `vercel.json` and `build_files.sh` at the root.
+5. In the **Environment Variables** section, you may optionally add a `DJANGO_SECRET_KEY` or `DEBUG=False`. 
+6. Click **Deploy** ✅.
 
-5. Click **Deploy** ✅
+*Note: Because Vercel uses a read-only filesystem, the application dynamically copies the SQLite database into Vercel's temporary writable `/tmp` folder upon initialization. This means the deployment functions as a perfect Demo System that resets itself periodically.*
 
-## 🤝 Contributing
+## 🤝 Contributing & Developer
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+This project is actively maintained. Contributions, bug reports, and feature requests are always welcome! 
 
-Please read `CODE_OF_CONDUCT.md` for details on our code of conduct and the process for submitting pull requests to us.
+**Developer:** Arnav Shukla
+- [LinkedIn Profile](https://www.linkedin.com/in/arnav-shukla-19615128a/)
+
+Please read `CODE_OF_CONDUCT.md` for details on our code of conduct.
 
 ## 📄 License
 
