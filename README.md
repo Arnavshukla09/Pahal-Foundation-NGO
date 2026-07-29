@@ -23,6 +23,18 @@ This web application serves as our digital headquarters—handling everything fr
 - **Admin Management:** Full access to site settings, encompassing volunteer tracking, student admissions, and complete database oversight.
 - **Student Information System:** Centralized tracking of enrolled students, their attendance records, and educational progress.
 
+## 🖼️ Screenshots
+
+<p align="center">
+  <img src="screenshots/logo.png" width="300" alt="Pahal Foundation Logo"><br>
+</p>
+
+| Homepage | About Us |
+| :---: |:---:|
+| ![Homepage](screenshots/homepage.png) | ![About Us](screenshots/about.png) |
+| **Dashboard Overview** | **Student Information** |
+| ![Dashboard Overview](screenshots/dashboard-overview.png) | ![Student Info](screenshots/dashboard-students.png) |
+
 ## 🛠️ Technology Stack
 
 Our platform is built to be fast, scalable, and responsive:
