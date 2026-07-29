@@ -33,7 +33,8 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '.onrender.com',   # Render.com deployment
+    '.onrender.com',
+    '.vercel.app',
     os.environ.get('RENDER_EXTERNAL_HOSTNAME', ''),
 ]
 
@@ -44,6 +45,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
     'https://*.onrender.com',
+    'https://*.vercel.app',
 ]
 
 
