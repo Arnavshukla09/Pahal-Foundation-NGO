@@ -51,7 +51,7 @@ def profile(request):
 def timetable(request):
     return render(request, 'content/timetable.html', get_dashboard_stats())
 
-@allowed_users(allowed_roles=['admin'])
+@login_required(login_url='/login/')
 def create_blog(request):
     form = WriteBlog()
     if request.method == 'POST':
@@ -68,7 +68,7 @@ def create_blog(request):
     context = {**get_dashboard_stats(), 'form': form}
     return render(request, 'content/blogcreate.html', context)
 
-@allowed_users(allowed_roles=['admin'])
+@login_required(login_url='/login/')
 def my_blogs(request):
     blogs = Blog.objects.filter(owner=request.user).order_by('-time')
     context = {**get_dashboard_stats(), 'blogs': blogs}
