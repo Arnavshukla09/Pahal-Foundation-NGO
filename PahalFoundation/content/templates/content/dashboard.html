@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard - Pahal Foundation</title>
+    <link rel="stylesheet" href="teacher-styles.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <div class="side-menu" id="side-menu">
+
+        <div class="brand-name">
+            <h2>Pahal Foundation VITB</h2>
+        </div>
+
+        <div class="menu-item" onclick="toggleMenu('dashboardMenu')">
+            <span><i class="fa fa-home"></i> Dashboard</span>
+            <i class="fa fa-angle-down"></i>
+        </div>
+
+        <div id="dashboardMenu" class="submenu">
+            <a href="dashboard.html">Overview</a>
+            <a href="#">Time Table</a>
+        </div>
+
+        <div class="menu-item" onclick="toggleMenu('studentsMenu')">
+            <span><i class="fa fa-user-graduate"></i> Students</span>
+            <i class="fa fa-angle-down"></i>
+        </div>
+
+        <div id="studentsMenu" class="submenu">
+            <a href="#">Student Info</a>
+            <a href="attendance.html">Attendance</a>
+        </div>
+
+        <div class="menu-item" onclick="toggleMenu('contentMenu')">
+            <span><i class="fa fa-pen"></i> Content</span>
+            <i class="fa fa-angle-down"></i>
+        </div>
+
+        <div id="contentMenu" class="submenu">
+            <a href="#">Blogs</a>
+            <a href="#">Media</a>
+        </div>
+
+        <div class="menu-item">
+            <a href="#" id="logout" style="color: white;">
+                <i class="fa fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-right">
+        <div class="dashboard-container">
+
+            <h1>Welcome User</h1>
+
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Students</h3>
+                    <p id="total-students">0</p>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Today's Attendance</h3>
+                    <p id="today-attendance">0%</p>
+                </div>
+
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Weekly Attendance</h3>
+                    <p id="weekly-attendance">0%</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>
