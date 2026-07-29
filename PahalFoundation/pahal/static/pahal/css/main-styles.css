@@ -16,11 +16,6 @@
 
   html {
     scroll-behavior: smooth;
-    cursor: none;
-  }
-  
-  a, button, .btn, .btn-main, .team-image {
-    cursor: none !important;
   }
 
   body {
@@ -35,48 +30,7 @@
     font-weight: 700;
   }
 
-  /* Custom Cursor */
-  .custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
-  }
-  
-  .custom-cursor-follower {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 32px;
-    height: 32px;
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999998;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
-    transition-timing-function: ease-out;
-  }
-  
-  .custom-cursor.hover {
-    width: 24px;
-    height: 24px;
-    background-color: rgba(230, 126, 34, 0.4);
-  }
-  
-  .custom-cursor-follower.hover {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(230, 126, 34, 0.1);
-    border-color: transparent;
-  }
+
 
 /* --- CENTERED PRELOADER CSS --- */
 

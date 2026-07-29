@@ -265,32 +265,6 @@ window.onclick = function(event) {
         }
     }
 
-// --- Custom Cursor Logic ---
-const cursor = document.querySelector('.custom-cursor');
-const follower = document.querySelector('.custom-cursor-follower');
-
-if (cursor && follower) {
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        follower.style.left = e.clientX + 'px';
-        follower.style.top = e.clientY + 'px';
-    });
-
-    const hoverElements = document.querySelectorAll('a, button, .btn, .btn-main, .team-image, .social-links a');
-    
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('hover');
-            follower.classList.add('hover');
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('hover');
-            follower.classList.remove('hover');
-        });
-    });
-}
 
 // --- Scroll Reveal Animation ---
 const revealElements = document.querySelectorAll('.scroll-reveal, .fade-in, .info-card, .goods-card, .mission-card');
