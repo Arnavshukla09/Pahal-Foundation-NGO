@@ -155,10 +155,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = []  # App static dirs are picked up automatically via APP_DIRS
+STATICSFILES_DIRS = []  # App static dirs are picked up automatically via APP_DIRS
 
-# WhiteNoise static file compression and caching
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# WhiteNoise: serve compressed static files without requiring a manifest file
+# Use CompressedStaticFilesStorage (not Manifest) so no staticfiles.json is needed
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+# Allow WhiteNoise to find static files in app directories (no collectstatic needed at runtime)
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = True
 
 MEDIA_URL = '/media/'
 
@@ -180,9 +185,9 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
     },
-    # Static files served by WhiteNoise (not S3)
+    # Static files served by WhiteNoise — no manifest required
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
