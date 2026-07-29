@@ -17,7 +17,7 @@ PahalFoundation/PahalFoundation/env
 *.env
 
 # Django
-db.sqlite3
+# db.sqlite3  (allowed for Vercel demo deployment)
 staticfiles/
 media/
 

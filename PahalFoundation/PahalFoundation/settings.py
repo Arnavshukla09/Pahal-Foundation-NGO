@@ -98,10 +98,27 @@ WSGI_APPLICATION = 'PahalFoundation.wsgi.application'
 # ============================================================
 # Database — SQLite (100% free, built into Python, no setup)
 # ============================================================
+import shutil
+
+DB_PATH = BASE_DIR / 'db.sqlite3'
+TMP_DB_PATH = Path('/tmp/db.sqlite3')
+
+try:
+    # Check if BASE_DIR is writable (local or standard server)
+    if os.access(BASE_DIR, os.W_OK):
+        ACTIVE_DB = DB_PATH
+    else:
+        # We are on a read-only filesystem (Vercel serverless)
+        if DB_PATH.exists() and not TMP_DB_PATH.exists():
+            shutil.copy2(DB_PATH, TMP_DB_PATH)
+        ACTIVE_DB = TMP_DB_PATH
+except Exception:
+    ACTIVE_DB = TMP_DB_PATH
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': ACTIVE_DB,
     }
 }
 
