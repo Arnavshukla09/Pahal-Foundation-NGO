@@ -1,30 +1,56 @@
 {% extends 'content/dashboard.html' %}
+{% block page_title %}Student Info{% endblock %}
+{% block topbar_title %}Student Information{% endblock %}
+
 {% block body %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'content/css/dashboard-styles-2.css' %}">
-<div class="container">
-    <h1>Student Info</h1>
-    <div class="students-grid">
-        {% for st in students %}
-        <div class="student-card">
-            <div class="student-photo">
-                <img src="{{MEDIA_URL}}{{st.photo.url}}" alt="Photo of {{st.name}}">
-            </div>
-            <div class="student-details">
-                <p><strong>Roll No:</strong> {{st.roll_no}}</p>
-                {% if st.active == 1 %}
-                <p><strong>Status:</strong> <span class="status active">Active</span></p>
-                {% else %}
-                <p><strong>Status:</strong> <span class="status inactive">Inactive</span></p>
-                {% endif %}
-                <p><strong>Name:</strong> {{st.name}}</p>
-                <p><strong>Parent's Name:</strong> {{st.parents_name}}</p>
-                <p><strong>Phone No:</strong> {{st.phone_no}}</p>
-                <p><strong>Age:</strong> {{st.age}}</p>
-                <p><strong>Gender:</strong> {{st.gender}}</p>
-            </div>
+<div class="page-header">
+    <h1><i class="fas fa-user-graduate"></i> All Students</h1>
+    <p>{{ students|length }} student{{ students|length|pluralize }} enrolled in Pahal Foundation.</p>
+</div>
+
+<div style="display:flex; justify-content:flex-end; margin-bottom:18px; gap:10px;">
+    <a href="/dashboard/admission/" class="btn btn-primary">
+        <i class="fas fa-user-plus"></i> Admit New Student
+    </a>
+</div>
+
+<div class="students-grid">
+    {% for st in students %}
+    <div class="student-card">
+        <div class="student-photo">
+            {% if st.photo %}
+                <img src="{{ st.photo.url }}" alt="{{ st.name }}">
+            {% else %}
+                <div class="no-photo">{{ st.name|first|upper }}</div>
+            {% endif %}
         </div>
-        {% endfor %}
+        <div class="student-details">
+            <div class="student-name">{{ st.name }}</div>
+            <p>
+                {% if st.active %}
+                    <span class="badge badge-green"><i class="fas fa-circle" style="font-size:7px;"></i> Active</span>
+                {% else %}
+                    <span class="badge badge-gray">Inactive</span>
+                {% endif %}
+                <span class="badge badge-blue">{{ st.grade|default:"No Grade" }}</span>
+            </p>
+            <p><strong>Roll No:</strong> #{{ st.roll_no }}</p>
+            <p><strong>Parent:</strong> {{ st.parents_name }}</p>
+            <p><strong>Phone:</strong> {{ st.phone_no }}</p>
+            <p><strong>Age:</strong> {{ st.age }} yrs &nbsp;|&nbsp; <strong>Gender:</strong> {{ st.gender }}</p>
+            {% if st.prev_school %}
+            <p><strong>Prev School:</strong> {{ st.prev_school }}</p>
+            {% endif %}
+        </div>
     </div>
+    {% empty %}
+    <div style="grid-column:1/-1; text-align:center; padding:60px; color:#aaa;">
+        <i class="fas fa-user-graduate" style="font-size:48px; color:#ddd; display:block; margin-bottom:16px;"></i>
+        <h3 style="color:#777; font-size:16px; margin-bottom:8px;">No students enrolled yet</h3>
+        <a href="/dashboard/admission/" class="btn btn-primary" style="margin-top:12px;">
+            <i class="fas fa-user-plus"></i> Admit First Student
+        </a>
+    </div>
+    {% endfor %}
 </div>
 {% endblock body %}

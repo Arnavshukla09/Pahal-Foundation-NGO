@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: pahal-foundation-ngo
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn PahalFoundation.wsgi --log-file -"
+    rootDir: "PahalFoundation"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: "3.11.0"

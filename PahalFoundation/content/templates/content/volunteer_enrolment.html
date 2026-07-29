@@ -1,59 +1,90 @@
 {% extends 'content/dashboard.html' %}
+{% block page_title %}Volunteer Enrolment{% endblock %}
+{% block topbar_title %}Enrol Volunteer{% endblock %}
+
 {% block body %}
-<style>
-  label {
-    display: block;
-    margin: 15px 0 5px;
-    color: #333;
-  }
-
-  input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-</style>
-<div class="form-container">
-    <h2>Volunteer Registration Form</h2>
-    <div>
-        {% if messages %}
-        <div>
-            {% for message in messages %}
-            {{message}}
-            {% endfor %}
-        </div>
-        {% endif %}
-    </div>
-    <form enctype="multipart/form-data" method="post" id="volunteer_form">
-        {% csrf_token %}
-        <label for="Reg_no">Registration Number</label>
-        <input type="text" id="Reg_no" name="Reg_no" required>
-
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="designation">Designation (e.g. Teacher, Media Team, Management Team)</label>
-        <input type="text" id="designation" name="designation" required>
-
-        <label for="email">College Email</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone_no" pattern="[0-9]{10}" required>
-
-        <label for="photo">Upload Photo</label>
-        <input type="file" id="photo" name="photo" accept="image/*" required>
-
-        <label for="interest">Area of Interest</label>
-        <input type="text" id="interest" name="interest" placeholder="e.g. Teaching, Fundraising, Event Management" required>
-
-        <label for="experience">Past Volunteering Experience (if any)</label>
-        <textarea id="experience" name="experience" rows="3"></textarea>
-
-        <button class="submit-btn" type="submit">Submit Volunteer Form</button>
-    </form>
+<div class="page-header">
+    <h1><i class="fas fa-user-plus"></i> Volunteer Enrolment</h1>
+    <p>Register a new volunteer with Pahal Foundation.</p>
 </div>
 
+{% if messages %}
+<div style="margin-bottom:16px;">
+    {% for message in messages %}
+    <div class="message-bar {% if message.tags == 'error' %}error{% else %}success{% endif %}">
+        <i class="fas {% if message.tags == 'error' %}fa-times-circle{% else %}fa-check-circle{% endif %}"></i>
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="form-container">
+    <div class="form-header">
+        <h2><i class="fas fa-id-card"></i> Volunteer Registration Form</h2>
+        <p>Fill all required fields to register a new volunteer.</p>
+    </div>
+
+    <form enctype="multipart/form-data" method="post" id="volunteer_form">
+        {% csrf_token %}
+        <div class="form-body">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Reg_no">Registration Number *</label>
+                    <input type="text" id="Reg_no" name="Reg_no" placeholder="e.g. PF-2024-007" required>
+                </div>
+                <div class="form-group">
+                    <label for="designation">Designation *</label>
+                    <input type="text" id="designation" name="designation"
+                           placeholder="e.g. Math Teacher, Event Coordinator" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" placeholder="e.g. Dr. Priya Sharma" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="e.g. priya@example.com" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone_no">Phone Number *</label>
+                    <input type="tel" id="phone_no" name="phone_no"
+                           placeholder="10-digit mobile" pattern="[0-9]{10,12}" required>
+                </div>
+                <div class="form-group">
+                    <label for="interest">Area of Interest *</label>
+                    <input type="text" id="interest" name="interest"
+                           placeholder="e.g. Teaching, Fundraising, Events" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Past Volunteering Experience</label>
+                <textarea id="experience" name="experience" rows="3"
+                          placeholder="Briefly describe any previous volunteer or teaching experience..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="photo">Volunteer Photo</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+            </div>
+
+        </div>
+        <div class="form-submit">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-save"></i> Submit Volunteer Form
+            </button>
+            <a href="/dashboard/volunteer-info/" class="btn btn-outline" style="margin-left:10px;">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
 {% endblock body %}

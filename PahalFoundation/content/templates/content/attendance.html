@@ -1,47 +1,112 @@
 {% extends 'content/dashboard.html' %}
+{% block page_title %}Attendance{% endblock %}
+{% block topbar_title %}Take Attendance{% endblock %}
+
 {% block body %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'content/css/dashboard-styles-2.css' %}">
-<div class="container attendance-container">
-    <h1>Take Attendance</h1>
-    <div>
-        {% if messages %}
-        <div>
-            {% for message in messages %}
-            {{message}}
-            {% endfor %}
-        </div>
-        {% endif %}
-    </div>
-    <div class="table-container">
-        <form method="post">
-            {% csrf_token %}
-        <button id="save-attendance" class="btn attendance-btn">Save Attendance</button>
-        <table id="attendance-table">
-            <thead>
-            <tr>
-                <th>Roll No.</th>
-                <th>Student Name</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for st in students %}
-            <tr>
-                <td><span>{{st.roll_no}}</span></td>
-                <td><span>{{st.name}}</span></td>
-                <td>
-                    <select class="status-select" id="{{st.roll_no}}" name="rollNo{{st.roll_no}}">
-                        <option>Select Status</option>
-                        <option value="present" class="status-present">Present</option>
-                        <option value="absent" class="status-absent">Absent</option>
-                    </select>
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        </form>
-    </div>
+<div class="page-header">
+    <h1><i class="fas fa-calendar-check"></i> Mark Attendance</h1>
+    <p>Record today's attendance for all active students.</p>
 </div>
+
+{% if messages %}
+<div style="margin-bottom:16px;">
+    {% for message in messages %}
+    <div class="message-bar {% if message.tags == 'error' %}error{% else %}success{% endif %}">
+        <i class="fas {% if message.tags == 'error' %}fa-times-circle{% else %}fa-check-circle{% endif %}"></i>
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="dash-panel">
+    <div class="panel-header">
+        <h2><i class="fas fa-list-check"></i> Student List — {{ students|length }} students</h2>
+        <span style="font-size:12px; color:#888;">Select Present / Absent for each student</span>
+    </div>
+
+    <form method="post" class="attendance-container" style="padding:0;">
+        {% csrf_token %}
+
+        <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display:flex; align-items:center; gap:10px;">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Save Attendance
+            </button>
+            <button type="button" class="btn btn-outline" onclick="markAll('present')">
+                <i class="fas fa-check-double"></i> All Present
+            </button>
+            <button type="button" class="btn btn-outline" onclick="markAll('absent')">
+                <i class="fas fa-times"></i> All Absent
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table id="attendance-table">
+                <thead>
+                    <tr>
+                        <th style="width:70px;">Roll No.</th>
+                        <th>Student Name</th>
+                        <th style="width:160px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for st in students %}
+                    <tr>
+                        <td><strong>#{{ st.roll_no }}</strong></td>
+                        <td>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div style="width:32px; height:32px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; flex-shrink:0;">
+                                    {{ st.name|first|upper }}
+                                </div>
+                                <div>
+                                    <div style="font-weight:600; font-size:14px; color:#1e2030;">{{ st.name }}</div>
+                                    <div style="font-size:11px; color:#aaa;">{{ st.grade|default:"No grade" }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <select class="status-select att-select" id="{{ st.roll_no }}" name="rollNo{{ st.roll_no }}"
+                                    onchange="highlightRow(this)">
+                                <option value="">— Select —</option>
+                                <option value="present">Present</option>
+                                <option value="absent">Absent</option>
+                            </select>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" style="text-align:center; padding:40px; color:#aaa;">
+                            No active students found.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="padding: 16px 20px; border-top: 1px solid var(--border);">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Save Attendance
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+function markAll(status) {
+    document.querySelectorAll('.att-select').forEach(sel => {
+        sel.value = status;
+        highlightRow(sel);
+    });
+}
+
+function highlightRow(sel) {
+    const row = sel.closest('tr');
+    row.style.background = sel.value === 'present'
+        ? 'rgba(34,197,94,0.05)'
+        : sel.value === 'absent'
+        ? 'rgba(232,62,80,0.05)'
+        : '';
+}
+</script>
 {% endblock body %}

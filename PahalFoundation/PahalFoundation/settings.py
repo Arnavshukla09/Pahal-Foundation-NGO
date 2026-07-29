@@ -25,24 +25,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-fallback-key-change-in-production')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-local-dev-key-change-this')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '.vercel.app',
-    '.now.sh',
-    '*',  # Remove this in production and add your exact domain
+    '.onrender.com',   # Render.com deployment
+    os.environ.get('RENDER_EXTERNAL_HOSTNAME', ''),
 ]
 
+# Remove empty strings from allowed hosts
+ALLOWED_HOSTS = [h for h in ALLOWED_HOSTS if h]
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.vercel.app',
-    'https://*.now.sh',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
+    'https://*.onrender.com',
 ]
 
 
@@ -57,13 +58,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pahal',
     'content',
-    'storages',
     'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # <-- WhiteNoise for static files on Vercel
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -93,28 +93,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'PahalFoundation.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# PyMySQL compatibility patch (must be before Django uses the DB)
-try:
-    import pymysql
-    pymysql.install_as_MySQLdb()
-except ImportError:
-    pass
-
+# ============================================================
+# Database — SQLite (100% free, built into Python, no setup)
+# ============================================================
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get('DB_NAME', ''),
-        "USER": os.environ.get('DB_USER_ROOT', ''),
-        "PASSWORD": os.environ.get('DB_PASSWORD_ROOT', ''),
-        "HOST": os.environ.get('DB_HOST', ''),
-        "PORT": os.environ.get('DB_PORT', '12727'),
-        "OPTIONS": {
-            "ssl": {"ssl-mode": "REQUIRED"},
-            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -143,57 +128,59 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_TZ = True
 
 
+# ============================================================
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+# ============================================================
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICSFILES_DIRS = []  # App static dirs are picked up automatically via APP_DIRS
 
-# WhiteNoise: serve compressed static files without requiring a manifest file
-# Use CompressedStaticFilesStorage (not Manifest) so no staticfiles.json is needed
+# WhiteNoise: serve compressed static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
-# Allow WhiteNoise to find static files in app directories (no collectstatic needed at runtime)
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
 
+
+# ============================================================
+# Media files — Local filesystem (100% free, no cloud needed)
+# Uploaded files (student/volunteer photos, thumbnails, etc.)
+# are stored in the media/ folder inside the project.
+# ============================================================
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STORAGES = {
+    # Media files → local disk (free, unlimited by your disk space)
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    # Static files → WhiteNoise (free)
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AWS S3 for media files (uploads: student photos, volunteer photos, blog images)
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
-AWS_S3_REGION_NAME = 'eu-north-1'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_FILE_OVERWRITE = False
 
-STORAGES = {
-    # Media files go to S3
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-    },
-    # Static files served by WhiteNoise — no manifest required
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
-}
-
-# Razorpay
+# ============================================================
+# Razorpay Payment Gateway
+# Use test keys (free) from https://dashboard.razorpay.com/
+# Test mode: no real money is charged
+# ============================================================
 RAZORPAY_API_KEY = os.environ.get('RAZORPAY_API_KEY', '')
 RAZORPAY_API_SECRET = os.environ.get('RAZORPAY_API_SECRET', '')
+
 
 # CKEditor 5 config
 try:

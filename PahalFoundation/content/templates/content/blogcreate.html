@@ -1,29 +1,69 @@
 {% extends 'content/dashboard.html' %}
+{% block page_title %}Write Blog{% endblock %}
+{% block topbar_title %}Write a Blog Post{% endblock %}
+
 {% block body %}
 {% load static %}
-<div class="container">
-    {{form.media}}
-    <h1>Create Your new Blog here!!</h1>
-    <div>
-        {% if messages %}
-        <div>
-            {% for message in messages %}
-            {{message}}
-            {% endfor %}
-        </div>
-        {% endif %}
+<div class="page-header">
+    <h1><i class="fas fa-pen"></i> Write a Blog Post</h1>
+    <p>Share updates, achievements, and stories from Pahal Foundation.</p>
+</div>
+
+{% if messages %}
+<div style="margin-bottom:16px;">
+    {% for message in messages %}
+    <div class="message-bar {% if message.tags == 'error' %}error{% else %}success{% endif %}">
+        <i class="fas {% if message.tags == 'error' %}fa-times-circle{% else %}fa-check-circle{% endif %}"></i>
+        {{ message }}
     </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="form-container" style="max-width:800px;">
+    <div class="form-header">
+        <h2><i class="fas fa-blog"></i> New Blog Post</h2>
+        <p>Write your content using the rich text editor below.</p>
+    </div>
+
+    {{ form.media }}
+
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
-
-        <label>Title:</label>
-        {{form.title}}
-
-        <label>Content:</label>
-        {{form.content}}
-
-        <button type="submit" class="submit-btn">Post your Blog</button>
+        <div class="form-body">
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Blog Title *</label>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                <label>Content *</label>
+                <div style="border: 1.5px solid var(--border); border-radius: var(--radius-sm); overflow:hidden;">
+                    {{ form.content }}
+                </div>
+            </div>
+        </div>
+        <div class="form-submit" style="display:flex; gap:10px;">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Publish Blog Post
+            </button>
+            <a href="/dashboard/my_blogs/" class="btn btn-outline">Cancel</a>
+        </div>
     </form>
 </div>
 
+<style>
+/* Make CKEditor title field match our design */
+#id_title {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: #1e2030;
+    transition: border-color 0.2s;
+    background: #fafbff;
+}
+#id_title:focus { outline: none; border-color: var(--primary); }
+</style>
 {% endblock body %}

@@ -1,19 +1,189 @@
 {% extends 'content/dashboard.html' %}
+{% block page_title %}Overview{% endblock %}
+{% block topbar_title %}Dashboard Overview{% endblock %}
+
 {% block body %}
-{% load static %}
-<div class="container">
-    <div class="cards">
-        <div class="card">
-            <h2>Total Students</h2>
+<!-- Welcome -->
+<div class="page-header">
+    <h1><i class="fas fa-chart-pie"></i> Welcome, {{ request.user.first_name|default:request.user.username }}!</h1>
+    <p>Here's what's happening at Pahal Foundation today.</p>
+</div>
+
+<!-- Stat Cards -->
+<div class="dashboard-stats">
+    <div class="stat-card">
+        <div class="stat-icon red"><i class="fas fa-user-graduate"></i></div>
+        <div class="stat-body">
+            <h3>Total Students</h3>
+            <div class="stat-value">{{ total_students }}</div>
+            <div class="stat-sub">Active enrollments</div>
         </div>
-        <div class="card">
-            <h2>Total Teachers</h2>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon green"><i class="fas fa-calendar-check"></i></div>
+        <div class="stat-body">
+            <h3>Today's Attendance</h3>
+            <div class="stat-value">{{ today_attendance }}%</div>
+            <div class="stat-sub">Students present today</div>
         </div>
-        <div class="card">
-            <h2>Total Schools</h2>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon blue"><i class="fas fa-chart-line"></i></div>
+        <div class="stat-body">
+            <h3>Weekly Attendance</h3>
+            <div class="stat-value">{{ weekly_attendance }}%</div>
+            <div class="stat-sub">Last 7 days average</div>
         </div>
-        <div class="card">
-            <h2>Total Batches</h2>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon purple"><i class="fas fa-hands-helping"></i></div>
+        <div class="stat-body">
+            <h3>Volunteers</h3>
+            <div class="stat-value">{{ total_volunteers }}</div>
+            <div class="stat-sub">Active volunteers</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon amber"><i class="fas fa-blog"></i></div>
+        <div class="stat-body">
+            <h3>Blog Posts</h3>
+            <div class="stat-value">{{ total_blogs }}</div>
+            <div class="stat-sub">Published articles</div>
+        </div>
+    </div>
+</div>
+
+<!-- Attendance Progress -->
+<div class="dash-grid" style="margin-bottom:20px;">
+    <div class="dash-panel">
+        <div class="panel-header">
+            <h2><i class="fas fa-chart-bar"></i> Attendance Overview</h2>
+        </div>
+        <div style="padding: 20px; display:flex; flex-direction:column; gap:14px;">
+            <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;">
+                    <span style="color:#555; font-weight:500;">Today's Attendance</span>
+                    <span style="font-weight:700; color:#1e2030;">{{ today_attendance }}%</span>
+                </div>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill green" style="width: {{ today_attendance }}%;"></div>
+                </div>
+            </div>
+            <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px;">
+                    <span style="color:#555; font-weight:500;">Weekly Average</span>
+                    <span style="font-weight:700; color:#1e2030;">{{ weekly_attendance }}%</span>
+                </div>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill blue" style="width: {{ weekly_attendance }}%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="dash-panel">
+        <div class="panel-header">
+            <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+        </div>
+        <div style="padding: 20px; display:flex; flex-direction:column; gap:10px;">
+            <a href="/dashboard/attendance/" class="btn btn-primary" style="width:100%; justify-content:center;">
+                <i class="fas fa-calendar-check"></i> Take Today's Attendance
+            </a>
+            <a href="/dashboard/admission/" class="btn btn-outline" style="width:100%; justify-content:center;">
+                <i class="fas fa-user-plus"></i> Admit New Student
+            </a>
+            <a href="/dashboard/create_blog/" class="btn btn-outline" style="width:100%; justify-content:center;">
+                <i class="fas fa-pen"></i> Write a Blog Post
+            </a>
+            {% if request.user.is_superuser %}
+            <a href="/dashboard/volunteer-enrolment/" class="btn btn-outline" style="width:100%; justify-content:center;">
+                <i class="fas fa-hands-helping"></i> Enrol Volunteer
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Today's Attendance + Recent Students -->
+<div class="dash-grid">
+    <div class="dash-panel">
+        <div class="panel-header">
+            <h2><i class="fas fa-calendar-day"></i> Today's Attendance</h2>
+            <a href="/dashboard/attendance/" class="panel-link">Take attendance →</a>
+        </div>
+        <div class="table-container">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Roll No.</th>
+                        <th>Student</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rec in today_records %}
+                    <tr>
+                        <td><strong>#{{ rec.student.roll_no }}</strong></td>
+                        <td>{{ rec.student.name }}</td>
+                        <td>
+                            {% if rec.status|lower == 'present' %}
+                                <span class="badge badge-green"><i class="fas fa-check-circle"></i> Present</span>
+                            {% else %}
+                                <span class="badge badge-red"><i class="fas fa-times-circle"></i> Absent</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" style="text-align:center; color:#aaa; padding:24px;">
+                            <i class="fas fa-calendar-times" style="font-size:24px; display:block; margin-bottom:8px;"></i>
+                            No attendance taken today yet.
+                            <a href="/dashboard/attendance/" style="color: var(--primary); display:block; margin-top:8px;">Take attendance →</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="dash-panel">
+        <div class="panel-header">
+            <h2><i class="fas fa-users"></i> Recent Students</h2>
+            <a href="/dashboard/student-info/" class="panel-link">View all →</a>
+        </div>
+        <div class="table-container">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Roll</th>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for st in recent_students %}
+                    <tr>
+                        <td><strong>#{{ st.roll_no }}</strong></td>
+                        <td>{{ st.name }}</td>
+                        <td><span class="badge badge-blue">{{ st.grade|default:"—" }}</span></td>
+                        <td>
+                            {% if st.active %}
+                                <span class="badge badge-green">Active</span>
+                            {% else %}
+                                <span class="badge badge-gray">Inactive</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" style="text-align:center; color:#aaa; padding:24px;">No students yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -1,0 +1,78 @@
+{% extends 'content/dashboard.html' %}
+{% block page_title %}My Blogs{% endblock %}
+{% block topbar_title %}My Blog Posts{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1><i class="fas fa-blog"></i> My Blog Posts</h1>
+    <p>All blog posts written by you.</p>
+</div>
+
+<div style="display:flex; justify-content:flex-end; margin-bottom:18px;">
+    <a href="/dashboard/create_blog/" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Write New Blog
+    </a>
+</div>
+
+<div class="dash-panel">
+    <div class="panel-header">
+        <h2><i class="fas fa-newspaper"></i> Published Posts</h2>
+        <span style="font-size:12px; color:#888;">{{ blogs|length }} post{{ blogs|length|pluralize }}</span>
+    </div>
+
+    <div class="table-container">
+        <table class="dash-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Views</th>
+                    <th>Likes</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for blog in blogs %}
+                <tr>
+                    <td><strong>{{ forloop.counter }}</strong></td>
+                    <td>
+                        <a href="/blogpost/{{ blog.slug }}" target="_blank"
+                           style="color:#1e2030; font-weight:600; font-size:14px;">
+                            {{ blog.title|truncatechars:55 }}
+                        </a>
+                    </td>
+                    <td style="color:#888; font-size:13px;">{{ blog.time|date:"d M Y" }}</td>
+                    <td>
+                        <span class="badge badge-blue">
+                            <i class="fas fa-eye" style="font-size:10px;"></i> {{ blog.views }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-red">
+                            <i class="fas fa-heart" style="font-size:10px;"></i> {{ blog.likes }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="/blogpost/{{ blog.slug }}" target="_blank"
+                           class="btn btn-outline" style="padding:5px 12px; font-size:12px;">
+                            <i class="fas fa-external-link-alt"></i> View
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="text-align:center; padding:50px; color:#aaa;">
+                        <i class="fas fa-blog" style="font-size:40px; color:#ddd; display:block; margin-bottom:12px;"></i>
+                        <div style="font-size:15px; font-weight:600; color:#888; margin-bottom:8px;">No blogs written yet</div>
+                        <a href="/dashboard/create_blog/" class="btn btn-primary" style="margin-top:10px;">
+                            <i class="fas fa-pen"></i> Write Your First Blog
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock body %}

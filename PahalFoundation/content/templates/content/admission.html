@@ -1,74 +1,103 @@
 {% extends 'content/dashboard.html' %}
+{% block page_title %}Student Admission{% endblock %}
+{% block topbar_title %}Student Admission{% endblock %}
+
 {% block body %}
-<style>
-  label {
-    display: block;
-    margin: 15px 0 5px;
-    color: #333;
-  }
-
-  input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-</style>
-<div class="form-container">
-  <h2>Student Admission Form</h2>
-  <div>
-    {% if messages %}
-    <div>
-      {% for message in messages %}
-      {{message}}
-      {% endfor %}
-    </div>
-    {% endif %}
-  </div>
-  <form enctype="multipart/form-data" method="post" id="student_form">
-    {% csrf_token %}
-    <label for="id_roll_no">Registration Number</label>
-    <input type="number" name="roll_no" id="id_roll_no" required>
-
-    <label for="id_name">Student Name</label>
-    <input type="text" name="name" maxlength="40" id="id_name" required>
-
-    <label for="id_parents_name">Parent's Name</label>
-    <input type="text" name="parents_name" maxlength="40" id="id_parents_name" required>
-
-    <label for="id_age">Age</label>
-    <input type="number" name="age" id="id_age" required>
-
-    <label for="id_gender">Gender</label>
-    <select name="gender" id="id_gender" required>
-      <option value="">--Select--</option>
-      <option value="Female">Female</option>
-      <option value="Male">Male</option>
-      <option value="Other">Other</option>
-    </select>
-
-    <label for="id_photo">Upload Photo</label>
-    <input type="file" name="photo" accept="image/*" aria-invalid="true" id="id_photo" required>
-
-    <label for="admission_date">Date of Admission</label>
-    <input type="date" id="admission_date" name="date" required>
-
-    <label for="id_phone_no">Contact Number</label>
-    <input type="text" name="phone_no" maxlength="12" id="id_phone_no" pattern="[0-9]{10}" required>
-
-    <label for="id_address">Residential Address</label>
-    <textarea name="address" maxlength="40" id="id_address"></textarea>
-
-    <label for="id_grade">Class/Grade</label>
-    <input type="text" name="grade" maxlength="10" id="id_grade">
-
-    <label for="id_prev_school">Previous School (if any)</label>
-    <input type="text" name="prev_school" maxlength="30" id="id_prev_school">
-<!--      {{form.as_p}}-->
-
-    <button class="submit-btn" type="submit">Submit Admission Form</button>
-    </form>
+<div class="page-header">
+    <h1><i class="fas fa-user-plus"></i> Student Admission</h1>
+    <p>Enrol a new student into Pahal Foundation.</p>
 </div>
 
+{% if messages %}
+<div style="margin-bottom:16px;">
+    {% for message in messages %}
+    <div class="message-bar {% if message.tags == 'error' %}error{% else %}success{% endif %}">
+        <i class="fas {% if message.tags == 'error' %}fa-times-circle{% else %}fa-check-circle{% endif %}"></i>
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="form-container">
+    <div class="form-header">
+        <h2><i class="fas fa-clipboard-list"></i> Admission Form</h2>
+        <p>Fill all required fields to register a new student.</p>
+    </div>
+
+    <form enctype="multipart/form-data" method="post" id="student_form">
+        {% csrf_token %}
+        <div class="form-body">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_roll_no">Roll / Registration Number *</label>
+                    <input type="number" name="roll_no" id="id_roll_no" placeholder="e.g. 11" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_grade">Class / Grade</label>
+                    <input type="text" name="grade" maxlength="10" id="id_grade" placeholder="e.g. Class 5">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_name">Student Full Name *</label>
+                    <input type="text" name="name" maxlength="40" id="id_name" placeholder="e.g. Ravi Kumar" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_parents_name">Parent / Guardian Name *</label>
+                    <input type="text" name="parents_name" maxlength="40" id="id_parents_name" placeholder="e.g. Suresh Kumar" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_age">Age *</label>
+                    <input type="number" name="age" id="id_age" placeholder="e.g. 10" min="4" max="25" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_gender">Gender *</label>
+                    <select name="gender" id="id_gender" required>
+                        <option value="">— Select Gender —</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_phone_no">Contact Number *</label>
+                    <input type="text" name="phone_no" maxlength="12" id="id_phone_no"
+                           placeholder="10-digit mobile number" pattern="[0-9]{10,12}" required>
+                </div>
+                <div class="form-group">
+                    <label for="id_prev_school">Previous School</label>
+                    <input type="text" name="prev_school" maxlength="30" id="id_prev_school" placeholder="e.g. Government School">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="id_address">Residential Address</label>
+                <textarea name="address" maxlength="40" id="id_address" placeholder="Student's home address"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="id_photo">Student Photo</label>
+                <input type="file" name="photo" accept="image/*" id="id_photo">
+            </div>
+
+        </div>
+        <div class="form-submit">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-save"></i> Submit Admission Form
+            </button>
+            <a href="/dashboard/student-info/" class="btn btn-outline" style="margin-left:10px;">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
 {% endblock body %}

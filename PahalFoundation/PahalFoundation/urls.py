@@ -16,10 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('pahal.urls')),
-    path('',include('content.urls')),
+    path('', include('pahal.urls')),
+    path('', include('content.urls')),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
 ]
+
+# Serve media files locally during development (free, no cloud needed)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

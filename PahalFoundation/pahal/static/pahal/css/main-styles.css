@@ -1,11 +1,16 @@
 :root {
-    --primary-color: #e67e22;
-    --secondary-color: #d35400;
-    --background-color: #f4f4f4;
-    --text-color: #333;
-    --light-gray: #f4f4f4;
+    --primary-color: #e83e50;
+    --secondary-color: #c42d3e;
+    --background-color: #f0f2f8;
+    --text-color: #1e2030;
+    --light-gray: #f0f2f8;
     --white: #ffffff;
     --transition: all 0.3s ease;
+    --font-main: 'Inter', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+    --border-radius: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 24px rgba(0,0,0,0.12);
   }
 
   * {
@@ -365,14 +370,14 @@
 
 /* 1. Donate Now: Solid Primary Button (Filled Color) */
 .hero-buttons .primary-btn {
-    background-color: var(--primary-color); /* Uses #e67e22 */
+    background-color: var(--primary-color); /* Uses #e83e50 */
     color: var(--white);
     border: 2px solid var(--primary-color);
     backdrop-filter: none; /* Removes any inherited glass effect */
 }
 
 .hero-buttons .primary-btn:hover {
-    background-color: var(--secondary-color); /* Darker orange #d35400 on hover */
+    background-color: var(--secondary-color); /* Darker orange #c42d3e on hover */
     border-color: var(--secondary-color);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);
@@ -764,7 +769,7 @@
     content: "";
     width: 80px; /* half line */
     height: 3px;
-    background: #e67e22;
+    background: #e83e50;
     position: absolute;
     left: 0;
     bottom: -10px;
@@ -798,7 +803,7 @@
     margin: 0 auto 25px;
     border-radius: 50%;
     overflow: hidden;
-    border: 6px solid #e67e22;
+    border: 6px solid #e83e50;
     transition: 0.4s ease;
 }
 
@@ -859,7 +864,7 @@
 }
 
 .social-links a:hover {
-    color: #e67e22;
+    color: #e83e50;
 }
 
 /* ================= MODAL SECTION ================= */
@@ -918,7 +923,7 @@
 }
 
 .close-modal:hover {
-    color: #e67e22;
+    color: #e83e50;
 }
 
 /* Modal Layout */
@@ -951,14 +956,14 @@
 }
 
 .modal-text h4 {
-    color: #e67e22;
+    color: #e83e50;
     margin-bottom: 20px;
 }
 
 .modal-separator {
     width: 50px;
     height: 3px;
-    background: #e67e22;
+    background: #e83e50;
     margin-bottom: 20px;
 }
 
@@ -1030,7 +1035,7 @@
     content: "";
     width: 90px;
     height: 3px;
-    background: #e67e22;
+    background: #e83e50;
     position: absolute;
     left: 0;
     bottom: -10px;
@@ -1048,7 +1053,7 @@
     content: "";
     position: absolute;
     width: 3px;
-    background: #e67e22;
+    background: #e83e50;
     top: 0;
     bottom: 0;
     left: 50%;
@@ -1079,7 +1084,7 @@
     transform: translate(-50%, 0);
     width: 80px;
     height: 80px;
-    background: #e67e22;
+    background: #e83e50;
     color: #fff;
     border-radius: 50%;
     display: flex;

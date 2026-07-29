@@ -1,24 +1,54 @@
 {% extends 'content/dashboard.html' %}
+{% block page_title %}Volunteers{% endblock %}
+{% block topbar_title %}Volunteer Information{% endblock %}
+
 {% block body %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'content/css/dashboard-styles-2.css' %}">
-<div class="container">
-    <h1>Volunteer Info</h1>
-    <div class="students-grid">
-        {% for st in volunteer %}
-        <div class="student-card">
-            <div class="student-photo">
-                <img src="{{MEDIA_URL}}{{st.photo.url}}" alt="Photo of {{st.name}}">
-            </div>
-            <div class="student-details">
-                <p><strong>Roll No:</strong> {{st.Reg_no}}</p>
-                <p><strong>Name:</strong> {{st.name}}</p>
-                <p><strong>Desig:</strong> {{st.designation}}</p>
-                <p><strong>Email:</strong> {{st.email}}</p>
-                <p><strong>Phone No:</strong> {{st.phone_no}}</p>
-            </div>
+<div class="page-header">
+    <h1><i class="fas fa-hands-helping"></i> Volunteers</h1>
+    <p>{{ volunteer|length }} volunteer{{ volunteer|length|pluralize }} registered with Pahal Foundation.</p>
+</div>
+
+<div style="display:flex; justify-content:flex-end; margin-bottom:18px;">
+    <a href="/dashboard/volunteer-enrolment/" class="btn btn-primary">
+        <i class="fas fa-user-plus"></i> Enrol New Volunteer
+    </a>
+</div>
+
+<div class="volunteer-grid">
+    {% for v in volunteer %}
+    <div class="volunteer-card">
+        <div class="volunteer-avatar">
+            {% if v.photo %}
+                <img src="{{ v.photo.url }}" alt="{{ v.name }}">
+            {% else %}
+                {{ v.name|first|upper }}
+            {% endif %}
         </div>
-        {% endfor %}
+        <div class="volunteer-info">
+            <h3>{{ v.name }}</h3>
+            <div class="desig">{{ v.designation }}</div>
+            {% if v.email %}
+            <p><i class="fas fa-envelope" style="color:var(--primary);"></i> {{ v.email }}</p>
+            {% endif %}
+            {% if v.phone_no %}
+            <p><i class="fas fa-phone" style="color:var(--green);"></i> {{ v.phone_no }}</p>
+            {% endif %}
+            {% if v.interest %}
+            <p><i class="fas fa-star" style="color:var(--amber);"></i> {{ v.interest }}</p>
+            {% endif %}
+            <p style="margin-top:6px;">
+                <span class="badge badge-blue">{{ v.Reg_no }}</span>
+            </p>
+        </div>
     </div>
+    {% empty %}
+    <div style="grid-column:1/-1; text-align:center; padding:60px; color:#aaa;">
+        <i class="fas fa-hands-helping" style="font-size:48px; color:#ddd; display:block; margin-bottom:16px;"></i>
+        <h3 style="color:#777; margin-bottom:8px;">No volunteers enrolled yet</h3>
+        <a href="/dashboard/volunteer-enrolment/" class="btn btn-primary" style="margin-top:12px;">
+            <i class="fas fa-user-plus"></i> Enrol First Volunteer
+        </a>
+    </div>
+    {% endfor %}
 </div>
 {% endblock body %}

@@ -1,94 +1,225 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Teacher Dashboard - Pahal Foundation</title>
-    <link rel="stylesheet" href="teacher-styles.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}Dashboard{% endblock %} — Pahal Foundation</title>
+    <link rel="icon" type="image/icon" href="{% static 'pahal/icon/favicon.ico' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'content/css/dashboard-styles.css' %}">
 </head>
-
 <body>
 
 <div class="dashboard">
 
-    <!-- Sidebar -->
+    <!-- ── SIDEBAR ────────────────────────────────────────── -->
     <div class="side-menu" id="side-menu">
 
         <div class="brand-name">
-            <h2>Pahal Foundation VITB</h2>
+            <h2>Pahal Foundation</h2>
+            <div class="brand-sub">
+                {% if request.user.is_superuser %}Admin Portal
+                {% else %}Teacher Portal{% endif %}
+            </div>
         </div>
 
-        <div class="menu-item" onclick="toggleMenu('dashboardMenu')">
-            <span><i class="fa fa-home"></i> Dashboard</span>
-            <i class="fa fa-angle-down"></i>
-        </div>
-
-        <div id="dashboardMenu" class="submenu">
-            <a href="dashboard.html">Overview</a>
-            <a href="#">Time Table</a>
-        </div>
-
-        <div class="menu-item" onclick="toggleMenu('studentsMenu')">
-            <span><i class="fa fa-user-graduate"></i> Students</span>
-            <i class="fa fa-angle-down"></i>
-        </div>
-
-        <div id="studentsMenu" class="submenu">
-            <a href="#">Student Info</a>
-            <a href="attendance.html">Attendance</a>
-        </div>
-
-        <div class="menu-item" onclick="toggleMenu('contentMenu')">
-            <span><i class="fa fa-pen"></i> Content</span>
-            <i class="fa fa-angle-down"></i>
-        </div>
-
-        <div id="contentMenu" class="submenu">
-            <a href="#">Blogs</a>
-            <a href="#">Media</a>
-        </div>
-
-        <div class="menu-item">
-            <a href="#" id="logout" style="color: white;">
-                <i class="fa fa-sign-out-alt"></i> Logout
-            </a>
-        </div>
-
-    </div>
-
-    <!-- Main Content -->
-    <div class="dashboard-right">
-        <div class="dashboard-container">
-
-            <h1>Welcome User</h1>
-
-            <div class="dashboard-stats">
-                <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Total Students</h3>
-                    <p id="total-students">0</p>
+        <!-- User Badge -->
+        <div class="sidebar-user">
+            <div class="avatar">{{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}</div>
+            <div class="user-info">
+                <div class="user-name">{{ request.user.get_full_name|default:request.user.username }}</div>
+                <div class="user-role">
+                    {% if request.user.is_superuser %}Admin
+                    {% elif request.user.groups.all.0 %}{{ request.user.groups.all.0.name|capfirst }}
+                    {% else %}User{% endif %}
                 </div>
+            </div>
+        </div>
 
-                <div class="stat-card">
-                    <i class="fas fa-calendar-check"></i>
-                    <h3>Today's Attendance</h3>
-                    <p id="today-attendance">0%</p>
+        <!-- Quick Stats -->
+        <div class="sidebar-stats">
+            <div class="sidebar-stat">
+                <span class="s-label"><i class="fas fa-user-graduate"></i> Students</span>
+                <span class="s-value">{{ total_students|default:"0" }}</span>
+            </div>
+            <div class="sidebar-stat">
+                <span class="s-label"><i class="fas fa-calendar-check"></i> Today</span>
+                <span class="s-value">{{ today_attendance|default:"0" }}%</span>
+            </div>
+            {% if request.user.is_superuser %}
+            <div class="sidebar-stat">
+                <span class="s-label"><i class="fas fa-hands-helping"></i> Volunteers</span>
+                <span class="s-value">{{ total_volunteers|default:"0" }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- ── NAVIGATION ── -->
+        <nav>
+
+            <!-- Dashboard -->
+            <div class="nav-section">
+                <div class="nav-section-label">Overview</div>
+                <div class="menu-item" onclick="toggleMenu('dashboardMenu', this)">
+                    <span class="menu-item-left">
+                        <i class="fas fa-home"></i> Dashboard
+                    </span>
+                    <i class="fas fa-angle-down"></i>
                 </div>
-
-                <div class="stat-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Weekly Attendance</h3>
-                    <p id="weekly-attendance">0%</p>
+                <div id="dashboardMenu" class="submenu show">
+                    <a href="/dashboard/profile/"
+                       {% if request.resolver_match.url_name == 'profile' %}class="active"{% endif %}>
+                        <i class="fas fa-chart-pie"></i> Overview
+                    </a>
+                    <a href="/dashboard/timetable/"
+                       {% if request.resolver_match.url_name == 'timetable' %}class="active"{% endif %}>
+                        <i class="fas fa-clock"></i> Time Table
+                    </a>
                 </div>
             </div>
 
+            <!-- Students — visible to ALL logged-in users -->
+            <div class="nav-section">
+                <div class="nav-section-label">Students</div>
+                <div class="menu-item" onclick="toggleMenu('studentsMenu', this)">
+                    <span class="menu-item-left">
+                        <i class="fas fa-user-graduate"></i> Students
+                    </span>
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div id="studentsMenu" class="submenu">
+                    <a href="/dashboard/student-info/"
+                       {% if request.resolver_match.url_name == 'student_info' %}class="active"{% endif %}>
+                        <i class="fas fa-list"></i> Student Info
+                    </a>
+                    <a href="/dashboard/attendance/"
+                       {% if request.resolver_match.url_name == 'attendance' %}class="active"{% endif %}>
+                        <i class="fas fa-calendar-check"></i> Attendance
+                    </a>
+                    <a href="/dashboard/admission/"
+                       {% if request.resolver_match.url_name == 'admission' %}class="active"{% endif %}>
+                        <i class="fas fa-user-plus"></i> Admission
+                    </a>
+                </div>
+            </div>
+
+            <!-- Volunteers — ADMIN only -->
+            {% if request.user.is_superuser %}
+            <div class="nav-section">
+                <div class="nav-section-label">Volunteers</div>
+                <div class="menu-item" onclick="toggleMenu('volunteerMenu', this)">
+                    <span class="menu-item-left">
+                        <i class="fas fa-hands-helping"></i> Volunteers
+                    </span>
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div id="volunteerMenu" class="submenu">
+                    <a href="/dashboard/volunteer-info/"
+                       {% if request.resolver_match.url_name == 'volunteer_info' %}class="active"{% endif %}>
+                        <i class="fas fa-id-card"></i> Volunteer Info
+                    </a>
+                    <a href="/dashboard/volunteer-enrolment/"
+                       {% if request.resolver_match.url_name == 'volunteer_enrolment' %}class="active"{% endif %}>
+                        <i class="fas fa-user-plus"></i> Enrol Volunteer
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Content — ADMIN only -->
+            {% if request.user.is_superuser %}
+            <div class="nav-section">
+                <div class="nav-section-label">Content</div>
+                <div class="menu-item" onclick="toggleMenu('contentMenu', this)">
+                    <span class="menu-item-left">
+                        <i class="fas fa-pen"></i> Content
+                    </span>
+                    <i class="fas fa-angle-down"></i>
+                </div>
+                <div id="contentMenu" class="submenu">
+                    <a href="/dashboard/create_blog/"
+                       {% if request.resolver_match.url_name == 'create_blog' %}class="active"{% endif %}>
+                        <i class="fas fa-plus"></i> Write Blog
+                    </a>
+                    <a href="/dashboard/my_blogs/"
+                       {% if request.resolver_match.url_name == 'dashboard_my_blogs' %}class="active"{% endif %}>
+                        <i class="fas fa-blog"></i> My Blogs
+                    </a>
+                    <a href="/blogs/">
+                        <i class="fas fa-newspaper"></i> All Blogs
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+        </nav>
+
+        <!-- Footer links -->
+        <div class="sidebar-footer">
+            <a href="/">
+                <i class="fas fa-globe"></i> View Website
+            </a>
+            <a href="/logout">
+                <i class="fas fa-sign-out-alt"></i> Sign Out
+            </a>
         </div>
-    </div>
 
-</div>
+    </div><!-- /side-menu -->
 
-<script src="dashboard.js"></script>
+    <!-- ── MAIN CONTENT ───────────────────────────────────── -->
+    <div class="dashboard-right">
 
+        <!-- Top Bar -->
+        <div class="dash-topbar">
+            <div class="page-title" style="display:flex; align-items:center; gap:12px;">
+                {% block topbar_title %}Dashboard{% endblock %}
+                <span style="font-size:11px; padding:4px 8px; background:rgba(232,62,80,0.1); color:var(--primary); border-radius:4px; font-weight:600; border:1px solid rgba(232,62,80,0.2);">DEMO SYSTEM</span>
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-user">
+                    <div class="t-avatar">{{ request.user.first_name|first|upper }}</div>
+                    {{ request.user.get_full_name|default:request.user.username }}
+                    <span style="color:#aaa; font-size:11px;">
+                        ({% if request.user.is_superuser %}Admin{% elif request.user.groups.all.0 %}{{ request.user.groups.all.0.name|capfirst }}{% else %}User{% endif %})
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Body -->
+        <div class="dashboard-container">
+            {% block body %}{% endblock body %}
+        </div>
+
+    </div><!-- /dashboard-right -->
+
+</div><!-- /dashboard -->
+
+<script>
+function toggleMenu(menuId, el) {
+    const menu = document.getElementById(menuId);
+    const allSubmenus = document.querySelectorAll('.submenu');
+    const allItems = document.querySelectorAll('.menu-item');
+
+    allSubmenus.forEach(m => { if (m.id !== menuId) m.classList.remove('show'); });
+    allItems.forEach(i => { if (i !== el) i.classList.remove('open'); });
+
+    menu.classList.toggle('show');
+    if (el) el.classList.toggle('open');
+}
+
+// Auto-open active section
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.submenu a.active').forEach(link => {
+        const submenu = link.closest('.submenu');
+        if (submenu) {
+            submenu.classList.add('show');
+            const item = submenu.previousElementSibling;
+            if (item && item.classList.contains('menu-item')) item.classList.add('open');
+        }
+    });
+});
+</script>
 </body>
 </html>
