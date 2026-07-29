@@ -13,7 +13,7 @@
             "src": "build_files.sh",
             "use": "@vercel/static-build",
             "config": {
-                "distDir": "PahalFoundation/staticfiles"
+                "distDir": "PahalFoundation/staticfiles_build"
             }
         }
     ],
