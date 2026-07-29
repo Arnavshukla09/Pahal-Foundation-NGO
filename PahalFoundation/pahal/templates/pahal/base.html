@@ -12,65 +12,151 @@
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
+<div id="preloader">
+    <div class="loader-content">
+        <div class="loader-logo-wrapper">
+            <img src="{% static 'pahal/icon/favicon.ico' %}" alt="PAHAL Logo" class="rotating-logo">
+        </div>
+
+        <div class="brand-reveal">
+            <h1 class="pahal-text">
+                <span>P</span><span>A</span><span>H</span><span>A</span><span>L</span>
+            </h1>
+            <h2 class="foundation-text">FOUNDATION</h2>
+        </div>
+
+        <div class="loader-container">
+            <div class="liquid-bar"></div>
+        </div>
+        <p class="loader-status">Igniting Minds, Transforming Lives</p>
+    </div>
+</div>    
 {{request.first_name}}
     <nav class="nav-bar h-nav-resp">
         <div class="logo pizza r-pizza-resp">
             <img src="{% static 'pahal/img/logo.jpeg' %}" alt="Pahal Foundation Logo">
             <a class="name-res" href="/">Pahal Foundation VITB</a>
         </div>
-        <ul class="nav-links nav-links-res">
-            <li class="name-home-res"><a href="/">Home</a></li>
-            <li><a href="/about" >About Us</a></li>
-            <li><a href="/blogs">Forum</a></li>
-            <li><a href="/volunteer">Volunteer</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-            {% if request.user.is_authenticated %}
-            <li><a href="/dashboard/profile">Dashboard</a></li>
-            <li><a href="/logout">Logout</a></li>
-            {% else %}
-            <li><a href="/login">Login</a></li>
-            {% endif %}
-            <li><a href="/donate" class="active">Donate</a></li>
-        </ul>
+<ul class="nav-links nav-links-res">
+
+    <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+
+    <li><a href="/about/" class="{% if '/about' in request.path %}active{% endif %}">About Us</a></li>
+
+    <li><a href="/blogs/" class="{% if '/blogs' in request.path %}active{% endif %}">Forum</a></li>
+
+    <li><a href="/volunteer/" class="{% if '/volunteer' in request.path %}active{% endif %}">Volunteer</a></li>
+
+    <li><a href="/contact/" class="{% if '/contact' in request.path %}active{% endif %}">Contact Us</a></li>
+
+    {% if request.user.is_authenticated %}
+        <li><a href="/dashboard/profile/" class="{% if '/dashboard' in request.path %}active{% endif %}">Dashboard</a></li>
+        <li><a href="/logout/">Logout</a></li>
+    {% else %}
+        <li><a href="/login/" class="{% if '/login' in request.path %}active{% endif %}">Login</a></li>
+    {% endif %}
+
+<li>
+            <a href="/donate/" class="donate-btn {% if request.path == '/donate' %}active{% endif %}">
+                <i class="fas fa-hand-holding-heart"></i>
+                Donate
+            </a>
+        </li>
+</ul>
     </nav>
 
         {% block body %}{% endblock body %}
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 466114 Kotri Kalan, Ashta, Bhopal, Madhya Pradesh</p>
-                    <p><i class="fas fa-phone"></i> +91 XXXXXXXXXX</p>
-                    <p><i class="fas fa-envelope"></i> pahalkids@gmail.com</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/blogs">Blogs</a></li>
-                        <li><a href="/error404">Gallery</a></li>
-                        <li><a href="/volunteer">Volunteer</a></li>
-                        <li><a href="/contact">Contact Us</a></li>
-                        <li><a href="/donate">Donate</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Connect With Us</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/pahalfoundation_vitb/"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Pahal Foundation. All rights reserved.</p>
+<footer class="main-footer">
+    <div class="footer-wrapper container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h2 class="footer-logo">Pahal Foundation VITB</h2>
+            <p class="footer-desc">
+                Creating equal opportunities through education, compassion,
+                and meaningful community engagement.
+            </p>
+
+            <div class="footer-social">
+                <a href="mailto:pahalkids@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.instagram.com/pahalfoundation_vitb/"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-    </footer>
-    <script src="{% static 'pahal/js/main.js' %}"></script>
+
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/blogs">Forum</a></li>
+                <li><a href="/volunteer">Volunteer</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/donate">Donate</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+<div class="footer-col">
+    <h3>Reach Us</h3>
+
+    <p>
+        <i class="fas fa-map-marker-alt"></i>
+        <a href="https://www.google.com/maps/place/VIT+Bhopal+University/"
+           target="_blank"
+           class="footer-link">
+           VIT Bhopal University, India
+        </a>
+    </p>
+
+    <p>
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:pahalkids@gmail.com" class="footer-link">
+            pahalkids@gmail.com
+        </a>
+    </p>
+
+    <p>
+        <i class="fas fa-phone"></i>
+        <a href="tel:+919896800458" class="footer-link">
+            +91 98968 00458
+        </a>
+    </p>
+</div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h3>Our Vision</h3>
+            <p>
+                We believe every child deserves access to education.
+                Together, we nurture dreams and build brighter futures.
+            </p>
+            <a href="/volunteer" class="footer-btn">Join Us</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Pahal Foundation. All rights reserved.</p>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+ <script src="{% static 'pahal/js/main.js' %}"></script>
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/681f88965fa91f190c49a24e/1iqtir3hf';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+
 </body>
 </html>         

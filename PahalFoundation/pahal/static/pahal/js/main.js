@@ -1,39 +1,67 @@
 // home elements
 document.addEventListener("DOMContentLoaded",()=>{
-    // Image Slider
-    const slider = document.querySelector('.slider');
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
 
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }
+// Counter Animation
+const counters = document.querySelectorAll(".counter");
+const speed = 200;
 
-    // Change slide every 3 seconds
-    setInterval(nextSlide, 3000);
+const animateCounter = (counter) => {
+    const target = parseInt(counter.getAttribute("data-target"));
 
-    // Counter Animation
-    const counters = document.querySelectorAll(".counter")
-    const speed = 200
-  
-    const animateCounter = (counter) => {
-      const target = +counter.getAttribute("data-target")
-      let count = 0
-      const increment = target / speed
-  
-      const updateCount = () => {
-        count += increment
+    if (isNaN(target)) return;   // Safety check
+
+    let count = 0;
+    const increment = target / speed;
+
+    const updateCount = () => {
+        count += increment;
+
         if (count < target) {
-          counter.innerText = Math.ceil(count)
-          requestAnimationFrame(updateCount)
+            counter.innerText = Math.ceil(count);
+            requestAnimationFrame(updateCount);
         } else {
-          counter.innerText = target
+            counter.innerText = target + "+";
         }
-      }
-      updateCount()
+    };
+
+    updateCount();
+};
+
+counters.forEach(counter => {
+    animateCounter(counter);
+});
+
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    const heroVideo = document.getElementById('heroVideo');
+
+    // Check if the user has already seen the preloader in this session
+    if (sessionStorage.getItem('preloaderPlayed')) {
+        // Hide preloader immediately without animation
+        preloader.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        
+        // Start video immediately
+        if(heroVideo) heroVideo.play();
+    } else {
+        // First time visit: Play animation
+        if(heroVideo) heroVideo.pause();
+
+        setTimeout(() => {
+            preloader.classList.add('preloader-hidden');
+            
+            if(heroVideo) {
+                heroVideo.play().catch(error => console.log("Auto-play blocked"));
+            }
+            
+            document.body.style.overflow = 'auto';
+            
+            // Mark the session so it doesn't play again
+            sessionStorage.setItem('preloaderPlayed', 'true');
+        }, 3000); 
     }
-  
+});
+
     // Scroll Reveal Animation
     const scrollReveal = () => {
       const elements = document.querySelectorAll(".scroll-reveal")
@@ -71,7 +99,24 @@ document.addEventListener("DOMContentLoaded",()=>{
         }
       })
     })
-  
+    // Back to top button functionality
+      const backToTop = document.querySelector(".back-to-top");
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {
+            backToTop.classList.add("show");
+        } else {
+            backToTop.classList.remove("show");
+        }
+    });
+
+    backToTop.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
     // Parallax effect for hero section
     const hero = document.querySelector(".hero")
     window.addEventListener("scroll", () => {
@@ -160,3 +205,62 @@ pizza.addEventListener('click',()=>{
     navlinks.classList.toggle('nav-links-res')
     pizza.classList.toggle('pizza')
 })
+// Donation Form Submission
+document.addEventListener("DOMContentLoaded", function () {
+    const donationForm = document.getElementById("donationForm");
+
+    if (donationForm) {
+        donationForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(donationForm);
+
+            try {
+                const response = await fetch(donationForm.action, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert("Donation request submitted successfully!");
+                    donationForm.reset();
+                } else {
+                    alert("Something went wrong. Please try again.");
+                }
+
+            } catch (error) {
+                alert("Error submitting form.");
+            }
+        });
+    }
+});
+function openModal(id) {
+    document.getElementById(id).style.display = "block";
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+}
+
+// Close modal if user clicks outside the box
+window.onclick = function(event) {
+    if (event.target.className === 'custom-modal') {
+        event.target.style.display = "none";
+    }
+}
+
+// FAQ Toggle Function
+    function toggleFaq(element) {
+        const item = element.parentElement;
+        item.classList.toggle('active');
+        
+        // Toggle icon between plus and minus
+        const icon = element.querySelector('i');
+        if (item.classList.contains('active')) {
+            icon.classList.replace('fa-plus', 'fa-minus');
+        } else {
+            icon.classList.replace('fa-minus', 'fa-plus');
+        }
+    }

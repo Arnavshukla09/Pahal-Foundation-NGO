@@ -4,49 +4,72 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Signup - Pahal Foundation</title>
+    <title>Teacher Signup | Pahal Foundation</title>
+    
     <link rel="stylesheet" href="{% static 'pahal/css/login-styles.css' %}">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="icon" type="image/icon" href="{% static 'pahal/icon/favicon.ico' %}">
+
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <div>
-                {% if messages %}
-                <div>
-                    {% for message in messages %}
-                    {{message}}
-                    {% endfor %}
+    
+    <div class="login-master-wrapper">
+        <div class="hero-bg-overlay"></div>
+        
+        <div class="container">
+            <div class="login-star-container animate__animated animate__zoomIn">
+                <div class="login-star-inner">
+                    
+                    <div class="form-head">
+                        <div class="form-icon-header"><i class="fas fa-user-plus"></i></div>
+                        <h3>Teacher Signup</h3>
+                        <p>Join the movement. Create your educator account below.</p>
+                    </div>
+
+                    {% if messages %}
+                    <div class="status-msg-box">
+                        {% for message in messages %}
+                        <p class="status-msg {{ message.tags }}"><i class="fas fa-info-circle"></i> {{message}}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" id="signup-form" class="star-form-layout">
+                        {% csrf_token %}
+                        
+                        <div class="floating-group">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="first_name" name="first_name" required placeholder="Full Name">
+                        </div>
+
+                        <div class="floating-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" required placeholder="Username">
+                        </div>
+
+                        <div class="floating-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" required placeholder="Email Address">
+                        </div>
+                        
+                        <div class="floating-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" required placeholder="Password">
+                        </div>
+                        
+                        <button type="submit" class="star-submit-btn">
+                            <span>Create Account</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="login-footer">
+                        <p>Already have an account? <a href="/login" class="gradient-link">Login Here</a></p>
+                    </div>
                 </div>
-                {% endif %}
-            </div>
-            <h1>Signup</h1>
-            <form method="POST" id="signup-form">
-                {% csrf_token %}
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="first_name" name="first_name" required placeholder="Full Name">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="username" name="username" required placeholder="Username">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" name="email" required placeholder="Email">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" name="password" required placeholder="Password">
-                </div>
-                <button type="submit" class="btn">Sign Up</button>
-            </form>
-            <div class="links">
-                <a href="/login">Already have an account? Login</a>
             </div>
         </div>
     </div>
-<!--    <script src="signup.js"></script>-->
 </body>
 </html>
-

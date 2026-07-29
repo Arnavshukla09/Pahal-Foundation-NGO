@@ -1,69 +1,231 @@
 {% extends 'pahal/base.html' %}
-{% block title %} About Us {% endblock title %}
+
+{% block title %} About Pahal | Our Mission, Vision & Detailed Impact {% endblock title %}
+
 {% block body %}
 {% load static %}
+
 <link rel="stylesheet" href="{% static 'pahal/css/aboutUs-styles.css' %}">
-<section>
-    <div class="about-container">
-        <h1 class="about-title">About Us</h1>
-        <p class="slogan">"Taking the First Step Towards a Brighter Future."</p>
-        <div class="about-section left">
-            <div class="about-content">
-                <h2>Our Story</h2>
-                <p>At Pahal Foundation, we believe that every child deserves a chance to dream, learn, and grow, regardless of their background. Founded with a vision to bridge the gap between privilege and need, Pahal Foundation is dedicated to supporting underprivileged children, especially those from the families of daily wage workers and marginalized communities.</p>
-            </div>
-            <div class="about-image">
-                <img src="{% static 'pahal/img/img1.jpg' %}" alt="Our Story">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<div class="about-page-main">
+
+    <header class="pahal-hero">
+        <div class="hero-backdrop"></div>
+        <div class="hero-content-box">
+            <div class="hero-badge animate__animated animate__fadeInDown">Building Brighter Futures Since 2021</div>
+            <h1 class="animate__animated animate__fadeInUp">Empowering Through <br><span class="highlight">Knowledge & Care</span></h1>
+            <p class="animate__animated animate__fadeInUp">Pahal Foundation is a student-led movement dedicated to transforming the lives of underprivileged children by providing the high-quality education and dedicated mentorship they deserve.</p>
+            <div class="hero-action-group animate__animated animate__fadeInUp">
+                <a href="#who-we-are" class="btn-primary-glow">Learn More <i class="fas fa-arrow-down"></i></a>
+                <a href="/volunteer" class="btn-secondary-outline">Join Our Team</a>
             </div>
         </div>
+    </header>
 
-        <div class="about-section left">  <!-- Changed to left -->
-            <div class="about-image">
-                <img src="{% static 'pahal/img/img2.jpg' %}" alt="Our Mission">
+    <div class="main-content-flow">
+        
+        <section id="who-we-are" class="split-section">
+            <div class="content-wrapper grid-layout">
+                <div class="text-side">
+                    <div class="pill-label">Introduction</div>
+                    <h2>Who We Are</h2>
+                    <p>We are a community of passionate university students who believe that our academic privilege is a responsibility. Based at <strong>VIT Bhopal University</strong>, we identify the children of campus workers, daily-wage laborers, and surrounding village communities who lack access to consistent, quality schooling.</p>
+                    <p>Pahal is 100% student-managed. Every "Pahalite" contributes their unique skills in technology, management, and pedagogy to provide a professional foundation for our kids. We aren't just teaching; we are building a support system that fosters confidence and emotional intelligence.</p>
+                    
+                    <div class="extra-content" style="margin-top: 20px; border-left: 3px solid var(--primary-orange); padding-left: 15px;">
+                        <h4 style="color: var(--primary-teal); margin-bottom: 10px;">Our Roots at VIT Bhopal</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-grey);">Operating within the heart of Central India, our foundation leverages the technical and creative talent of the VIT student body. We transform empty classrooms into hubs of hope, ensuring that the progress of the university also means the progress of its neighboring communities.</p>
+                    </div>
+
+                    <div class="stats-mini-grid">
+                        <div class="mini-stat"><strong>50+</strong> Active Mentors</div>
+                        <div class="mini-stat"><strong>100%</strong> Student Run</div>
+                        <div class="mini-stat"><strong>Daily</strong> Morning Classes</div>
+                    </div>
+                </div>
+                <div class="visual-side">
+                    <div class="image-box-main">
+                        <img src="{% static 'pahal/img/j4.webp' %}" alt="Our Volunteers">
+                    </div>
+                </div>
             </div>
-            <div class="about-content">
-                <h2>Our Mission</h2>
-                <p>Our mission is simple yet powerful—to ensure that no child is deprived of education, essential clothing, and the basic necessities that every child deserves. We aim to break the cycle of poverty through quality education, skill development, and holistic support.</p>
+        </section>
+
+        <section class="values-section">
+            <div class="content-wrapper">
+                <div class="center-head">
+                    <div class="pill-label dark">Our DNA</div>
+                    <h2>The Values That Drive Us</h2>
+                </div>
+                <div class="values-grid">
+                    <div class="v-card">
+                        <div class="v-num">01</div>
+                        <div class="v-icon-wrap"><i class="fas fa-hand-holding-heart"></i></div>
+                        <h3>Dignity Over Pity</h3>
+                        <p>We do not provide "charity." We provide "opportunity." Every child is treated as a future professional, with their talents being the focus rather than their struggles.</p>
+                    </div>
+                    <div class="v-card">
+                        <div class="v-num">02</div>
+                        <div class="v-icon-wrap"><i class="fas fa-sync-alt"></i></div>
+                        <h3>Radical Consistency</h3>
+                        <p>Impact is made by showing up daily. We are committed to being a reliable, permanent part of these children's lives until they achieve self-sufficiency.</p>
+                    </div>
+                    <div class="v-card">
+                        <div class="v-num">03</div>
+                        <div class="v-icon-wrap"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Ethical Integrity</h3>
+                        <p>We ensure every donation and volunteer hour is directly translated into tangible child welfare with absolute transparency in our operations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="impact-quote-section" style="padding: 100px 20px; text-align: center; background: var(--bg-sand);">
+            <div class="content-wrapper">
+                <div class="quote-container animate__animated animate__fadeIn">
+                    <i class="fas fa-quote-left" style="font-size: 3rem; color: var(--primary-orange); opacity: 0.3; margin-bottom: 30px;"></i>
+                    <h2 style="font-size: 2.5rem; font-style: italic; color: var(--primary-teal); line-height: 1.4; max-width: 900px; margin: 0 auto;">
+                        "The distance between a dream and reality is called <strong>Pahal</strong>. We don't just teach lessons; we ignite the courage to change one's own destiny."
+                    </h2>
+                    <p style="margin-top: 30px; font-weight: 700; color: var(--primary-orange); letter-spacing: 2px; text-transform: uppercase;">
+                        — The Spirit of Pahal Foundation
+                    </p>
+                </div>
+            </div>
+        </section>
+
+<section class="purpose-section text-center-layout">
+    <div class="content-wrapper">
+        <div class="purpose-container-box">
+            <div class="center-head">
+                <div class="pill-label">The Purpose</div>
+                <h2>Why We Do What We Do</h2>
+                <p class="section-desc-center">In the shadows of modern development, millions of children remain trapped in a cycle where they must start working before they learn to read. At Pahal, we refuse to accept this as the final reality.</p>
+            </div>
+            
+            <div class="purpose-list-centered">
+                <div class="p-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="p-item-content">
+                        <strong>Breaking Cycles</strong>
+                        <span>Literacy is the only permanent exit from generational poverty.</span>
+                    </div>
+                </div>
+                <div class="p-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="p-item-content">
+                        <strong>Equal Access</strong>
+                        <span>Mentorship shouldn't be a luxury reserved for the elite.</span>
+                    </div>
+                </div>
+                <div class="p-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="p-item-content">
+                        <strong>Community Growth</strong>
+                        <span>An educated child uplifts the aspirations of an entire village.</span>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</section>
+        <section id="our-story" class="info-section text-center-layout">
+            <div class="wrapper">
+                <div class="center-head">
+                    <span class="tag-label">The Evolution</span>
+                    <h2>Our Story</h2>
+                    <p class="section-desc-center">What began in 2021 as a small circle of friends teaching under a tree at VIT Bhopal has evolved into a structured foundation. We realized that the world was waiting for us right outside our dormitories.</p>
+                </div>
 
-        <div class="about-section left">
-            <div class="about-content">
-                <h2>Our Vision</h2>
-                <p>We envision a society where children are not defined by their circumstances but by their dreams and potential. Our goal is to create an environment where education is a right, not a privilege, and where every child feels seen, heard, and valued.</p>
-            </div>
-            <div class="about-image">
-                <img src="{% static 'pahal/img/img3.jpg' %}" alt="Our Vision">
-            </div>
-        </div>
+                <div class="timeline-v-wrapper">
+                    <div class="v-line"></div>
+                    
+                    <div class="v-point">
+                        <div class="v-marker">2021</div>
+                        <div class="v-content">
+                            <strong>The First Step</strong>
+                            <p>Pahal was founded by a group of VITians with 5 volunteers and 10 curious kids under a tree near the campus gate.</p>
+                        </div>
+                    </div>
 
-        <!-- Why We Exist Section -->
-        <div class="about-section left">
-            <div class="about-image">
-                <img src="{% static 'pahal/img/img1.jpg' %}" alt="Why We Exist">
-            </div>
-            <div class="about-content">
-                <h2>Why We Exist</h2>
-                <p>We exist because millions of children in India face barriers to education, nutrition, and basic healthcare. Without intervention, these children often fall into cycles of poverty, making it difficult for them to escape their circumstances. At Pahal Foundation, we strive to provide a pathway for these children to access education, build skills, and create a better future for themselves and their families.</p>
-            </div>
-        </div>
+                    <div class="v-point">
+                        <div class="v-marker">2024</div>
+                        <div class="v-content">
+                            <strong>Scaling Impact</strong>
+                            <p>Expansion to neighboring villages like Kothri Kalan with a structured weekend and morning curriculum.</p>
+                        </div>
+                    </div>
 
-        <!-- What We Do Section -->
-        <div class="about-section right">
-            <div class="about-content">
-                <h2>What We Do</h2>
-                <p>Our work involves providing free education, distributing essential resources like books, clothes, and food, and conducting skill-development programs for underprivileged children. We collaborate with volunteers and organizations to create safe learning environments and ensure long-term positive change in the lives of these children.</p>
+                    <div class="v-point active">
+                        <div class="v-marker">Today</div>
+                        <div class="v-content">
+                            <strong>The Movement</strong>
+                            <p>50+ Mentors providing daily 1-on-1 guidance, digital literacy, and personal development to over 100+ students.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="about-image">
-                <img src="{% static 'pahal/img/img2.jpg' %}" alt="What We Do">
-            </div>
-        </div>
+        </section>
 
-        <!-- Volunteer Button -->
-        <div class="volunteer-section">
-            <a href="/volunteer" class="volunteer-button">Join Us in Making a Difference - Volunteer, Donate, or Spread the Word!</a>
+        <section class="methodology">
+            <div class="content-wrapper">
+                <div class="center-head">
+                    <div class="pill-label dark">How We Work</div>
+                    <h2>Our Impact Strategy</h2>
+                    <p>Our presence at VIT Bhopal allows us to use a multi-dimensional approach to empower local children.</p>
+                </div>
+                <div class="method-grid">
+                    <div class="method-item">
+                        <div class="m-icon"><i class="fas fa-book-reader"></i></div>
+                        <h4>Daily Morning Classes</h4>
+                        <p>Regular sessions on campus from 10 AM to 12:30 PM focusing on basic literacy, school catch-up, and math logic.</p>
+                    </div>
+                    <div class="method-item">
+                        <div class="m-icon"><i class="fas fa-kit-medical"></i></div>
+                        <h4>Health & Hygiene</h4>
+                        <p>Leveraging local resources for health checkups and providing workshops on sanitation and nutrition.</p>
+                    </div>
+                    <div class="method-item">
+                        <div class="m-icon"><i class="fas fa-palette"></i></div>
+                        <h4>Creative Workshops</h4>
+                        <p>Using the diverse talents of VIT students to teach art, drama, and sports to build public speaking skills.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mv-block">
+            <div class="wrapper grid-layout">
+                <div class="mv-item mission">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Our Mission</h3>
+                    <p>To identify every child in the Sehore/Bhopal periphery who is out of school and provide them with the materials, mentorship, and motivation required to lead a life of dignity.</p>
+                </div>
+                <div class="mv-item vision">
+                    <i class="fas fa-eye"></i>
+                    <h3>Our Vision</h3>
+                    <p>To create a replicable student-led NGO model starting from VIT Bhopal that can be adopted by universities nationwide to empower their local communities.</p>
+                </div>
+            </div>
+        </section>
+
+<section class="cta-banner">
+    <div class="cta-card">
+        <div class="cta-content-wrapper">
+            <div class="cta-text">
+                <h2>Ready to Make a Difference?</h2>
+                <p>Your "Pahal" (first step) today could be their giant leap tomorrow. Join our community of change-makers at VIT Bhopal.</p>
+            </div>
+            <div class="cta-btns">
+                <a href="/volunteer" class="btn-main-filled">Become a Volunteer</a>
+                <a href="/donate" class="btn-outline-white">Support via Donation <i class="fas fa-heart"></i></a>
+            </div>
         </div>
     </div>
 </section>
 
+    </div>
+</div>
 {% endblock body %}

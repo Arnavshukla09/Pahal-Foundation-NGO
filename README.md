@@ -2,7 +2,7 @@
 
 Welcome to the official repository for the Pahal Foundation's web application. This platform is a comprehensive tool designed to support the foundation's mission of empowering underprivileged students by providing educational resources, managing operations, and fostering a community of support.
 
-Website link - [www.pahalfoundation.com](https://pahalfoundation.onrender.com/)
+Website link - [pahal-foundation-ngo.vercel.app](https://pahal-foundation-ngo-git-master-arnavshukla0925-2353s-projects.vercel.app)
 
 ## 🌟 About
 
@@ -15,12 +15,10 @@ Pahal Foundation is a non-profit organization committed to empowering underprivi
 -   **Donation Portal:** Integrated with Razorpay for seamless and secure online donations.
 -   **Content Management:**
     -   **Blog/Forum:** A platform for teachers and admins to create, edit, and publish articles. Includes a rich text editor and a commenting system for community engagement.
-    -   **Video & Photo Gallery:** A space to upload and manage multimedia content to share our story and activities.
 -   **Student Management System:**
     -   **Admissions:** An easy-to-use form for enrolling new students.
     -   **Student Database:** A central place to view and manage detailed student information.
     -   **Attendance Tracking:** Functionality for teachers to take and record daily attendance.
-    -   **Progress Reports:** A system to monitor and document the academic and personal growth of each student.
 -   **Volunteer Management:**
     -   **Enrollment:** A dedicated form for new volunteers to register and join our cause.
     -   **Volunteer Database:** A directory of all volunteers and their information.
@@ -33,36 +31,34 @@ Pahal Foundation is a non-profit organization committed to empowering underprivi
 
 | Homepage | Volunteer Page |
 | :---: |:---:|
-| ![Homepage of Pahal Foundation website](screenshots/Screenshot%20(33).png) | ![Volunteer page with images of volunteers](screenshots/Screenshot%20(35).png) |
-| **Donation Page** | **Blog Page** |
-| ![Donation page with payment options](screenshots/Screenshot%20(36).png) | ![Blog forum page with articles and updates](screenshots/Screenshot%20(37).png) |
-| **Student Info Dashboard** | **Volunteer Enrollment Dashboard** |
-| ![Student information dashboard](screenshots/Screenshot%20(38).png)| ![Volunteer registration form](screenshots/Screenshot%20(40).png)|
-| **Blog Creation Interface** | **Attendance Tracking** |
-| ![Blog creation interface with text editor](screenshots/Screenshot%20(39).png) | ![Attendance tracking interface](screenshots/Screenshot%20(41).png) |
-
+| ![Homepage](screenshots/Screenshot%20(33).png) | ![Volunteer page](screenshots/Screenshot%20(35).png) |
+| **Donation Page** | **Dashboard** |
+| ![Donation page](screenshots/Screenshot%20(36).png) | ![Dashboard](screenshots/Screenshot%20(37).png) |
 
 ## 🛠️ Tech Stack
 
 * **Backend:** Python, Django
 * **Frontend:** HTML, CSS, JavaScript
-* **Database:** MySQL
-* **File Storage:** AWS S3 for media files.
-* **Payment Gateway:** RazorPay.
-* **Deployment:** Git, GitHub, Docker, Render.
+* **Database:** MySQL (Aiven Cloud)
+* **File Storage:** AWS S3 for media files
+* **Payment Gateway:** RazorPay
+* **Deployment:** Git, GitHub, **Vercel**
 
 ## 📂 Project Structure
-The project is organized into two main Django apps: pahal for the public-facing site and user authentication, and content for the internal dashboard and content management.
+
+The project is organized into two main Django apps: `pahal` for the public-facing site and user authentication, and `content` for the internal dashboard and content management.
 
 ```
 Pahal-Foundation-NGO/
 ├── .gitignore
+├── .env.example
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
 ├── PahalFoundation/
-│   ├── .dockerignore
-│   ├── Dockerfile
+│   ├── vercel.json
+│   ├── build_files.sh
 │   ├── manage.py
+│   ├── requirements.txt
 │   ├── PahalFoundation/
 │   │   ├── __init__.py
 │   │   ├── asgi.py
@@ -71,65 +67,50 @@ Pahal-Foundation-NGO/
 │   │   ├── urls.py
 │   │   └── wsgi.py
 │   ├── content/
-│   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── decorators.py
-│   │   ├── forms.py
-│   │   ├── migrations/
-│   │   │   ├── 0001_initial.py
-│   │   │   ├── ...
-│   │   │   └── __init__.py
 │   │   ├── models.py
-│   │   ├── static/
-│   │   │   └── content/
-│   │   │       ├── css/
-│   │   │       └── js/
-│   │   ├── templates/
-│   │   │   └── content/
-│   │   │       ├── admission.html
-│   │   │       ├── ...
-│   │   │       └── volunteer_info.html
-│   │   ├── templatetags/
-│   │   │   ├── __init__.py
-│   │   │   └── group_tags.py
-│   │   ├── tests.py
-│   │   ├── urls.py
 │   │   ├── views.py
 │   │   ├── views_teacher.py
-│   │   └── views_videos.py
+│   │   ├── views_videos.py
+│   │   ├── urls.py
+│   │   ├── forms.py
+│   │   ├── static/content/
+│   │   └── templates/content/
 │   └── pahal/
-│       ├── __init__.py
-│       ├── admin.py
-│       ├── apps.py
-│       ├── decorators.py
-│       ├── migrations/
-│       │   ├── 0001_initial.py
-│       │   ├── ...
-│       │   └── __init__.py
 │       ├── models.py
-│       ├── static/
-│       │   └── pahal/
-│       │       ├── css/
-│       │       ├── icon/
-│       │       └── js/
-│       ├── templates/
-│       │   └── pahal/
-│       │       ├── aboutUs.html
-│       │       ├── ...
-│       │       └── volunteer.html
-│       ├── tests.py
-│       ├── urls.py
 │       ├── views.py
-│       ├── views_main_pages.py
-│       └── views_teacher.py
+│       ├── urls.py
+│       ├── static/pahal/
+│       └── templates/pahal/
 ├── README.md
 ├── requirements.txt
 └── screenshots/
-    ├── Screenshot (33).png
-    ├── ...
-    └── Screenshot (41).png     
 ```
+
+## 🚀 Deploying to Vercel
+
+1. Fork / clone this repository
+2. Go to [vercel.com](https://vercel.com) → New Project → Import from GitHub
+3. Set **Root Directory** to `PahalFoundation`
+4. Add the following **Environment Variables** in Vercel project settings:
+
+| Variable | Description |
+|---|---|
+| `DJANGO_SECRET_KEY` | Django secret key |
+| `DEBUG` | Set to `False` |
+| `DB_HOST` | MySQL host (e.g. Aiven) |
+| `DB_NAME` | Database name |
+| `DB_USER_ROOT` | Database user |
+| `DB_PASSWORD_ROOT` | Database password |
+| `DB_PORT` | Database port |
+| `AWS_ACCESS_KEY_ID` | AWS S3 access key |
+| `AWS_SECRET_ACCESS_KEY` | AWS S3 secret key |
+| `AWS_STORAGE_BUCKET_NAME` | S3 bucket name |
+| `RAZORPAY_API_KEY` | Razorpay key |
+| `RAZORPAY_API_SECRET` | Razorpay secret |
+
+5. Click **Deploy** ✅
+
+See `.env.example` for the full list of required variables.
 
 ## 🤝 Contributing
 

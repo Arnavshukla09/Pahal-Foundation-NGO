@@ -21,6 +21,106 @@
     color: var(--text-color);
   }
 
+/* --- CENTERED PRELOADER CSS --- */
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column; /* Stack vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    z-index: 100000;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* 3D Rotating Logo */
+.loader-logo-wrapper {
+    perspective: 1000px;
+    margin-bottom: 25px;
+}
+
+.rotating-logo {
+    width: 110px;
+    animation: rotate3D 3s infinite linear;
+}
+
+@keyframes rotate3D {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+/* Staggered Text Reveal */
+.pahal-text {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: 10px;
+    margin: 0;
+    color: #222;
+}
+
+.pahal-text span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: letterReveal 0.5s ease forwards;
+}
+
+.pahal-text span:nth-child(1) { animation-delay: 0.1s; }
+.pahal-text span:nth-child(2) { animation-delay: 0.2s; }
+.pahal-text span:nth-child(3) { animation-delay: 0.3s; }
+.pahal-text span:nth-child(4) { animation-delay: 0.4s; }
+.pahal-text span:nth-child(5) { animation-delay: 0.5s; }
+
+.foundation-text {
+    font-size: 1.1rem;
+    letter-spacing: 14px;
+    color: var(--primary-color);
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 0.8s;
+}
+
+/* Liquid Loading Bar */
+.loader-container {
+    width: 280px;
+    height: 4px;
+    background: #f0f0f0;
+    margin: 30px auto 15px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+}
+
+.liquid-bar {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    animation: liquidMove 1.5s infinite linear;
+}
+
+@keyframes letterReveal { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes liquidMove { 0% { left: -100%; } 100% { left: 100%; } }
+
+/* Exit State */
+.preloader-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+}
+  
   a{
     text-decoration: none;
     color:var(--primary-color);
@@ -31,7 +131,6 @@
     margin: 0 auto;
     padding: 0 20px;
   }
-
   /* Navigation */
   nav {
     background-color: var(--white);
@@ -75,12 +174,66 @@
     color: var(--white);
   }
 
+/* Strong Active Page Indicator */
+.nav-links a.active {
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+ 
+/* --- FIXED DONATE BUTTON ALIGNMENT --- */
+  .donate-btn {
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    color: #ffffff !important;
+    padding: 0.7rem 1.8rem !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(255, 126, 95, 0.4);
+    border: none;
+    gap: 10px;
+    margin-left: 10px; /* Gives the button a bit of breathing room */
+  }
+
+  .donate-btn:hover {
+    transform: scale(1.05) translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 126, 95, 0.6);
+  }
+
+
 /* Hero Section with Slider */
 .hero {
-    height: 80vh;
+    height: 90vh;
     margin-top: 74px;
     position: relative;
     overflow: hidden;
+}
+
+.video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video fills the screen without stretching */
+    z-index: -1; /* Keeps video behind the text */
+}
+
+/* Optional: Add a dark overlay to make the white text more readable */
+.video-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Darkens the video by 40% */
+    z-index: 0;
 }
 
 .slider-wrapper {
@@ -111,15 +264,15 @@
 .text-overlay {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    left: 10%; /* Positions the text block on the left side */
+    transform: translateY(-50%); /* Only translate Y to keep it centered vertically */
+    text-align: left; /* Aligns the actual text lines to the left */
     color: var(--white);
     z-index: 2;
     width: 100%;
+    max-width: 700px; /* Prevents text from stretching across the whole screen */
     padding: 0 20px;
 }
-
 .text-overlay h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
@@ -161,6 +314,156 @@
     transform: translateY(20px);
     animation: fadeInUp 1s ease forwards 0.3s;
   }
+/* Left-Aligned Text Overlay */
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 10%; /* Positions the text block on the left side */
+    transform: translateY(-50%); /* Only translate Y to keep it centered vertically */
+    text-align: left; /* Aligns the actual text lines to the left */
+    color: var(--white);
+    z-index: 2;
+    width: 100%;
+    max-width: 700px; /* Prevents text from stretching across the whole screen */
+    padding: 0 20px;
+}
+
+/* Glass Effect Buttons */
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-start; /* Aligns buttons to the left */
+    margin-top: 2.5rem;
+}
+
+.hero-buttons .btn {
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.hero-buttons .btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 1. Donate Now: Solid Primary Button (Filled Color) */
+.hero-buttons .primary-btn {
+    background-color: var(--primary-color); /* Uses #e67e22 */
+    color: var(--white);
+    border: 2px solid var(--primary-color);
+    backdrop-filter: none; /* Removes any inherited glass effect */
+}
+
+.hero-buttons .primary-btn:hover {
+    background-color: var(--secondary-color); /* Darker orange #d35400 on hover */
+    border-color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);
+}
+
+/* 2. Become a Volunteer: Frosted Glass Effect */
+.hero-buttons .btn-glass {
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+}
+
+.hero-buttons .btn-glass:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Animation adjustments for left alignment */
+.text-overlay h1, 
+.text-overlay p,
+.hero-buttons {
+    opacity: 0;
+    transform: translateX(-30px); /* Changed from Y to X for a side-entry feel */
+    animation: fadeInLeft 1s ease forwards;
+}
+
+.highlight-text {
+    color: #4df3e0; /* The cyan/teal color from your reference image */
+}
+
+.text-overlay p {
+    animation-delay: 0.3s;
+}
+
+.hero-buttons {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scroll for More Indicator - Bottom Right Position */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #4df3e0; /* Matches your teal highlight color */
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+/* The vertical line container */
+.scroll-line {
+    width: 2px;
+    height: 60px;
+    background: rgba(77, 243, 224, 0.2); /* Faded version of the teal */
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* The moving animated "spark" inside the line */
+.scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #4df3e0; /* Solid teal spark */
+    animation: scrollMove 2.5s infinite;
+}
+
+/* Animation to slide the spark from top to bottom */
+@keyframes scrollMove {
+    0% {
+        top: -100%;
+    }
+    100% {
+        top: 100%;
+    }
+}
+
+/* Hide on small mobile devices to prevent clutter */
+@media (max-width: 768px) {
+    .scroll-indicator {
+        display: none;
+    }
+}
 
   /* Sections */
   section {
@@ -173,251 +476,1056 @@
     margin-bottom: 3rem;
     color: var(--primary-color);
   }
+/* Mission Section Background */
+/* Mission Section Wrapper */
+.mission-section {
+    padding: 5rem 0;
+    background-color: var(--background-color);
+}
 
-  /* Mission Section */
-  .mission-content {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-  }
-
-  .mission-text {
-    font-size: 1.2rem;
-    line-height: 1.8;
-  }
-
-  .mission-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  .stat {
-    text-align: center;
-  }
-
-  .counter {
-    font-size: 3rem;
-    font-weight: bold;
-    color: var(--primary-color);
-  }
-
-  /* Values Section */
-  .values-section {
-    background-color: var(--light-gray);
-  }
-
-  .values-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
-
-  .value-card {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
+/* Elevated Card Container */
+.mission-card {
+    background: #fffcf9; /* Soft cream tint */
+    border-radius: 30px;
+    padding: 3.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(230, 126, 34, 0.1);
     transition: var(--transition);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+    position: relative; /* Essential for absolute image positioning */
+    overflow: visible; /* Allows image to "float" slightly above if needed */
+}
 
-  .value-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-  }
+.mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
 
-  .value-card i {
-    font-size: 2.5rem;
+/* Header Flex for Title and Top-Aligned Image */
+.mission-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.section-title {
     color: var(--primary-color);
-    margin-bottom: 1rem;
-  }
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
 
-  /* Team Section */
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 3rem;
-  }
+.title-underline {
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    margin-bottom: 2rem;
+    opacity: 0.4;
+}
 
-  .team-member {
-    text-align: center;
-  }
-
-  .member-image {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 1rem;
-    border-radius: 50%;
+/* The Animated Square Image */
+.mission-image {
+    width: 320px; /* Adjust size to fill empty space */
+    aspect-ratio: 1 / 1.2;
+    border-radius: 24px;
     overflow: hidden;
-    border: 5px solid var(--primary-color);
-  }
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border: none; 
+    
+    /* Perfect Top Alignment */
+    position: absolute;
+    top: 3.5rem; 
+    right: 3.5rem; 
+}
 
-  .member-image img {
+.mission-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition);
-  }
+    display: block;
+    transition: transform 0.5s ease;
+}
 
-  .team-member:hover .member-image img {
+/* Hover Effect: Zoom */
+.mission-image:hover img {
     transform: scale(1.1);
-  }
+}
 
-  .team-member h3 {
-    margin: 1rem 0 0.5rem;
-  }
 
-  .social-links {
-    margin-top: 1rem;
-  }
+/* Text Content Area */
+.mission-content {
+    max-width: 60%; /* Prevents text from hitting the image */
+}
 
-  .social-links a {
+.mission-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: var(--text-color);
-    margin: 0 0.5rem;
-    font-size: 1.2rem;
-    transition: var(--transition);
-  }
+}
 
-  .social-links a:hover {
+/* Stats Grid */
+.mission-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.counter {
+    font-size: 3rem;
+    font-weight: 800;
     color: var(--primary-color);
-  }
+    display: block;
+}
+
+.stat p {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .mission-card {
+        padding: 2.5rem;
+        overflow: hidden;
+    }
+    
+    .mission-image {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto 2rem auto;
+        animation: none; /* Disable float on mobile for better usability */
+    }
+
+    .mission-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .section-title {
+        text-align: center;
+    }
+
+    .title-underline {
+        margin: 0 auto 2rem auto;
+    }
+
+    .mission-stats {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Values Section Styling */
+.values-section {
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #fdf6e3 0%, #f4f4f4 100%); /* Soft warm gradient */
+    position: relative;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+/* Enhanced Value Card */
+.value-card {
+    background: var(--white);
+    padding: 3rem 2rem;
+    border-radius: 20px; /* Matching your newer card styles */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(230, 126, 34, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover Effects */
+.value-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(230, 126, 34, 0.15);
+    background: #fffcf9;
+}
+
+/* Icon Wrapper with a soft glow */
+.card-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: rgba(230, 126, 34, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    transition: var(--transition);
+}
+
+.value-card:hover .card-icon-wrapper {
+    background: var(--primary-color);
+}
+
+.value-card i {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.value-card:hover i {
+    color: var(--white);
+}
+
+/* Typography */
+.value-card h3 {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.value-card p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Bottom Decorative Accent */
+.card-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.value-card:hover .card-accent {
+    transform: scaleX(1);
+}
+
+  /* Team Section */
+
+/* ================= TEAM SECTION ================= */
+
+.team-section {
+    padding: 70px 0;
+    background: #f3f3f3;
+}
+
+/* Box Like 2nd Image */
+.team-box-frame {
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 70px 60px;
+    border: none; /* removed blue border */
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.12); 
+}
+
+/* Title Left Aligned */
+.team-box-frame .section-title {
+    text-align: left;
+    margin-bottom: 25px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Half underline */
+.team-box-frame .section-title::after {
+    content: "";
+    width: 80px; /* half line */
+    height: 3px;
+    background: #e67e22;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    border-radius: 5px;
+}
+
+/* Team Layout */
+.team-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 120px;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.member-click-area {
+    cursor: pointer;
+    display: block;
+}
+
+/* Circular Image */
+.member-image {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid #e67e22;
+    transition: 0.4s ease;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: 0.4s ease;
+}
+/* Overlay Text */
+.click-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(230, 126, 34, 0.85);
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 8px 0;
+    text-align: center;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+/* Show overlay on hover */
+.member-image:hover .click-overlay {
+    opacity: 1;
+}
+
+/* Zoom image on hover */
+.member-image:hover img {
+    transform: scale(1.1);
+}
+
+/* Glow effect */
+.member-image:hover {
+    box-shadow: 0 0 25px rgba(230, 126, 34, 0.6);
+    cursor: pointer;
+}
+/* Text */
+.team-member h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.team-member p {
+    font-size: 1.05rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    font-size: 1.3rem;
+    margin: 0 10px;
+    color: #222;
+    transition: 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #e67e22;
+}
+
+/* ================= MODAL SECTION ================= */
+
+.modal-state {
+    display: none;
+}
+
+.modal-overlay {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: 0.3s ease;
+}
+
+/* Show Modal */
+#modal-sumit:checked ~ .modal-sumit-view,
+#modal-nirmala:checked ~ .modal-nirmala-view {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Card */
+.modal-content {
+    background: #fff;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    animation: slideUp 0.4s ease-out;
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    color: #e67e22;
+}
+
+/* Modal Layout */
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Modal Image */
+.modal-image {
+    width: 100%;
+    height: 280px;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Modal Text */
+.modal-text {
+    padding: 35px;
+    text-align: left;
+}
+
+.modal-text h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.modal-text h4 {
+    color: #e67e22;
+    margin-bottom: 20px;
+}
+
+.modal-separator {
+    width: 50px;
+    height: 3px;
+    background: #e67e22;
+    margin-bottom: 20px;
+}
+
+.modal-text p {
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #444;
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+    .team-grid {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .team-box-frame {
+        padding: 50px 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-image {
+        height: 200px;
+    }
+
+    .modal-text {
+        padding: 25px;
+    }
+}
 
   /* Timeline Section */
-  .timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-  }
+/* ================= OUR JOURNEY SECTION ================= */
 
-  .timeline::after {
+.timeline-section {
+    padding: 10px 0;
+    background: #f3f3f3;
+}
+
+.journey-box {
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 80px 60px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.08);
+}
+
+/* Title underline */
+.journey-box .section-title {
+    text-align: left;
+    margin-bottom: 60px;
+    position: relative;
+    display: inline-block;
+}
+
+.journey-box .section-title::after {
+    content: "";
+    width: 90px;
+    height: 3px;
+    background: #e67e22;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    border-radius: 5px;
+}
+
+/* Timeline Base */
+.timeline {
+    position: relative;
+    margin-top: 40px;
+}
+
+/* Center Line */
+.timeline::before {
     content: "";
     position: absolute;
-    width: 2px;
-    background: var(--primary-color);
+    width: 3px;
+    background: #e67e22;
     top: 0;
     bottom: 0;
     left: 50%;
-    margin-left: -1px;
-  }
+    transform: translateX(-50%);
+}
 
-  .timeline-item {
-    padding: 10px 40px;
+/* Timeline Item */
+.timeline-item {
     position: relative;
     width: 50%;
-  }
+    padding: 40px 50px;
+}
 
-  .timeline-item:nth-child(odd) {
+.timeline-item:nth-child(odd) {
     left: 0;
-  }
+    text-align: right;
+}
 
-  .timeline-item:nth-child(even) {
+.timeline-item:nth-child(even) {
     left: 50%;
-  }
+}
 
-  .timeline-content {
-    padding: 20px;
-    background: var(--white);
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+/* Year Dot */
+.timeline-dot {
+    position: absolute;
+    top: 40px;
+    left: 100%;
+    transform: translate(-50%, 0);
+    width: 80px;
+    height: 80px;
+    background: #e67e22;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
 
-  .timeline-content h3 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-  }
+.timeline-item:nth-child(even) .timeline-dot {
+    left: 0;
+    transform: translate(-50%, 0);
+}
 
+/* Timeline Content Card */
+.timeline-content {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--primary-color);
+    transition: 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-8px);
+}
+
+.timeline-content p {
+    line-height: 1.7;
+    color: #555;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+
+    .timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        margin-bottom: 60px;
+    }
+
+    .timeline-item:nth-child(odd),
+    .timeline-item:nth-child(even) {
+        left: 0;
+        text-align: left;
+    }
+
+    .timeline-dot {
+        left: 20px;
+        transform: translate(-50%, 0);
+    }
+}
   /* CTA Section */
-  .cta-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
-    background-size: cover;
-    background-position: center;
-    color: var(--white);
-    text-align: center;
+.cta-section {
     padding: 5rem 0;
-  }
+    background-color: var(--background-color);
+}
 
-  .cta-content {
-    max-width: 600px;
-    margin: 0 auto;
-  }
+/* The Main Card with Hover Effect */
+.cta-card {
+    background: #fffcf9;
+    border-radius: 30px;
+    overflow: hidden; /* This clips the image to the card's rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    border: 1px solid rgba(230, 126, 34, 0.1);
+}
+.cta-image-top {
+    width: 100%;
+    height: 300px; /* Adjust this height as per your preference */
+    overflow: hidden;
+}
 
-  .cta-buttons {
-    margin-top: 2rem;
+.cta-image-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Keeps image proportions while filling the area */
+    display: block;
+}
+/* Style for the image at the top */
+.cta-image-header {
+    width: 100%;
+    height: 350px; /* Adjust height as needed */
+}
+
+.cta-image-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image isn't stretched */
+    display: block;
+}
+
+/* Add padding back to the text area */
+.cta-body {
+    padding: 3.5rem; /* Your original container padding */
+}
+
+/* Adjust the grid for responsiveness */
+@media (max-width: 992px) {
+    .cta-image-header {
+        height: 250px;
+    }
+}
+/* Hovering Shadow Effect */
+.cta-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Grid Layout */
+.cta-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 4rem;
+    padding: 3.5rem; /* Moves padding from the card to the grid area */
+    align-items: start;
+}
+
+/* Left Column Styling */
+.cta-title {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.title-underline {
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    margin-bottom: 2rem;
+    opacity: 0.4;
+}
+
+.cta-description {
+    color: var(--text-color);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.secondary-text {
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+/* Right Column (Road Ahead) */
+.cta-right {
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    padding-left: 2.5rem;
+}
+
+.road-ahead-title {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+
+.roadmap-list {
+    list-style: none;
+    padding: 0;
+}
+
+.roadmap-item {
     display: flex;
     gap: 1rem;
-    justify-content: center;
-  }
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
 
-  .btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: var(--transition);
-  }
-
-  .primary-btn {
+.number-circle {
     background: var(--primary-color);
-    color: var(--white);
-  }
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    margin-top: 3px;
+}
 
-  .secondary-btn {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-  }
-
-  .primary-btn:hover,
-  .secondary-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Footer */
-  footer {
-    background: #333;
-    color: var(--white);
-    padding: 4rem 0 2rem;
-  }
-
-  .footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .footer-section h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-  }
-
-  .footer-section ul {
-    list-style: none;
-  }
-
-  .footer-section ul li {
-    margin-bottom: 0.5rem;
-  }
-
-  .footer-section a {
-    color: var(--white);
+/* Buttons */
+.cta-buttons {
+    display: flex;
+    gap: 1.2rem; /* Adds space between the two buttons */
+    margin-top: 2.5rem;
+}
+.btn {
+    display: inline-block;
+    padding: 12px 28px; /* Critical: Adds internal space */
+    border-radius: 6px; /* Smooth rounded corners */
+    font-weight: 600;
+    font-size: 1rem;
     text-decoration: none;
-    transition: var(--transition);
-  }
+    transition: all 0.3s ease; /* Makes hover smooth */
+    cursor: pointer;
+    border: 2px solid var(--primary-color);
+}
+.primary-btn {
+    background-color: var(--primary-color);
+    color: #ffffff !important; /* Ensure text is white */
+}
 
-  .footer-section a:hover {
-    color: var(--primary-color);
-  }
+/* Volunteer (Outline Button) */
+.secondary-btn {
+    background-color: transparent;
+    color: var(--primary-color) !important;
+}
+/* Hover Effects */
+.btn:hover {
+    transform: translateY(-3px); /* Lifts button up */
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3); /* Soft orange glow */
+}
 
-  .footer-bottom {
+/* Primary Hover: slightly darker */
+.primary-btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Secondary Hover: fills in slightly */
+.secondary-btn:hover {
+    background-color: rgba(230, 126, 34, 0.05);
+}
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .cta-grid {
+        grid-template-columns: 1fr;
+    }
+    .cta-right {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding-top: 2rem;
+    }
+}
+/* ================= MOTIVATIONAL QUOTE SECTION ================= */
+
+.quote-section {
+    background: #dfe0be; /* soft beige like image */
+    padding: 40px 20px;
     text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
+}
+
+.quote-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Big quotation mark */
+.quote-icon {
+    font-size: 120px;
+    color: #138196; /* teal like image */
+    line-height: 1;
+    margin-bottom: 40px;
+    font-family: serif;
+}
+
+/* Main quote text */
+.quote-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #000;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quote-text {
+        font-size: 2rem;
+    }
+
+    .quote-icon {
+        font-size: 80px;
+    }
+}
+  /* Footer */
+
+.main-footer {
+    background: var(--secondary-color);
+    color: #ffffff;
+    padding: 80px 0 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+/* Logo */
+.footer-logo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.footer-desc {
+    line-height: 1.7;
+    color: #e4f7fa;
+    margin-bottom: 20px;
+}
+
+/* Social Icons */
+.footer-social a {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #ffddc1;
+    transform: translateY(-4px);
+}
+
+/* Section Titles */
+.footer-col h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-col h3::after {
+    content: "";
+    width: 40px;
+    height: 2px;
+    background: #ffddc1;
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+}
+
+/* Links */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: #e4f7fa;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 6px;
+}
+
+/* Contact Text */
+.footer-col p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    color: #e4f7fa;
+}
+
+.footer-col i {
+    margin-right: 8px;
+}
+
+/* CTA Button */
+.footer-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #ffddc1;
+    color: #0f7c8c;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.footer-btn:hover {
+    background: #ffffff;
+    transform: translateY(-3px);
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    text-align: center;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.9rem;
+    color: #e4f7fa;
+}
+.footer-link {
+    color: #e4f7fa;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* ================= BACK TO TOP ================= */
+
+.back-to-top {
+    position: fixed;
+    left: 30px;   /* Changed from right to left */
+    bottom: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 999;
+}
+
+.back-to-top:hover {
+    background: #0f7c8c;
+    transform: translateY(-5px);
+}
+
+/* Show when scrolling */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-wrapper {
+        gap: 40px;
+    }
+}
 
   /* Animations */
   @keyframes fadeInUp {

@@ -5,93 +5,284 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate - Pahal Foundation</title>
+    <link rel="stylesheet" href="{% static 'pahal/css/main-styles.css' %}">
     <link rel="stylesheet" href="{% static 'pahal/css/donate-styles.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/icon" href="{% static 'pahal/icon/favicon.ico' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Pahal Foundation VIT</div>
-            <a href="/" class="back-btn">Back to Home</a>
-        </nav>
-    </header>
+    <nav class="nav-bar h-nav-resp">
+        <div class="logo pizza r-pizza-resp">
+            <img src="{% static 'pahal/img/logo.jpeg' %}" alt="Pahal Foundation Logo">
+            <a class="name-res" href="/">Pahal Foundation VITB</a>
+        </div>
+        <ul class="nav-links nav-links-res">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/blogs">Forum</a></li>
+            <li><a href="/volunteer">Volunteer</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="/dashboard/profile">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+<li>
+                <a href="/donate" class="donate-btn {% if request.path == '/donate' %}active{% endif %}">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    Donate
+                </a>
+            </li>
+                </ul>
+    </nav>
 
-    <main>
-        <section class="hero">
-            <h1>Make a Difference</h1>
-            <p class="subtitle">Your support can change lives. Choose how you'd like to contribute.</p>
-        </section>
+<main>
+<section class="hero-banner">
 
-        <section class="donation-options">
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="money">
-                    <i class="fas fa-rupee-sign"></i> Money
-                </button>
-                <button class="tab-btn" data-tab="goods">
-                    <i class="fas fa-box-open"></i> Goods
-                </button>
-                <button class="tab-btn" data-tab="other">
-                    <i class="fas fa-hand-holding-heart"></i> Other
-                </button>
+    <!-- Background Image -->
+    <img src="{% static 'pahal/img/d1.webp' %}" 
+         alt="Donation Background" 
+         class="hero-bg-image">
+
+    <!-- Gradient Overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Content -->
+    <div class="hero-content">
+
+<h1>Be the Reason a Child Smiles Today</h1>
+
+<p>
+    Right now, a child is waiting for a notebook, a warm meal, and a chance to dream.
+    Your small contribution can change the course of an entire life.
+    When you give, you don’t just donate — you create hope, opportunity, and a future.
+</p>
+
+        <div class="hero-stats">
+            <div class="stat-item">
+                <i class="fas fa-heart"></i>
+                <span>200+</span> Lives Transformed
             </div>
-            <div class="tab-content active" id="money">
-                <h2>Donate Money</h2>
-                <p>Your contribution can make a real difference</p>
-    
-                <form id="money-donation-form">
-                    <div class="form-group">
-                        <label for="donation-amount">Donation Amount (₹)</label>
-                        <input type="number" id="donation-amount" name="amount" min="100" required placeholder="Enter amount (min ₹100)">
-                    </div>
-                    <div class="form-group">
-                        <label for="donor-name">Your Name</label>
-                        <input type="text" id="donor-name" name="name" required placeholder="Enter your name">
-                    </div>
-                    <div class="form-group">
-                        <label for="donor-email">Your Email</label>
-                        <input type="email" id="donor-email" name="email" required placeholder="Enter your email">
-                    </div>
-                    <button type="submit" class="donate-btn">Donate Now</button>
-                </form>
 
+            <div class="stat-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>80+</span> School-Ready Children
+            </div>
+        </div>
 
-                <div class="donation-impact">
-                    <h3>Your Impact</h3>
-                    <div class="impact-items">
-                        <div class="impact-item">
-                            <span>₹500</span>
-                            <p>Provides meals for 10 children</p>
-                        </div>
-                        <div class="impact-item">
-                            <span>₹1,000</span>
-                            <p>Supplies educational materials for 5 students</p>
-                        </div>
-                        <div class="impact-item">
-                            <span>₹2,000</span>
-                            <p>Supports a child's education for a month</p>
-                        </div>
-                    </div>
+        <div class="hero-actions">
+            <a href="https://pages.razorpay.com/receipt" class="btn-main primary">
+                Sponsor a Child Today <i class="fas fa-bolt"></i>
+            </a>
+
+            <a href="#donate-section" class="btn-main glass-btn">
+                Support With Essentials <i class="fas fa-box-open"></i>
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+        <section id="donate-section" class="donate-container">
+            <div class="section-header">
+                <h2>Together, We Can Break the Cycle of Poverty</h2>
+                <div class="underline"></div>
+<p>
+Your contribution — big or small — directly impacts a child’s access to education,
+nutrition, and dignity. Choose how you would like to make a difference today.
+</p>            </div>
+
+            <div class="goods-grid">
+                <a href="https://pages.razorpay.com/receipt" class="goods-card money-card">
+                    <div class="card-badge">Fastest Impact</div>
+                    <div class="icon-circle"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h3>Financial Support</h3>
+                    <p>Your donation provides school supplies, nutritious meals, and learning support.
+                    Even ₹10 can bring education and stability into a child’s life.</p>
+                    <span class="action-btn">Proceed to Donate <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <div class="goods-card">
+                    <div class="icon-circle">📚</div>
+                    <h3>Donate Books & Learning Materials</h3>
+                    <p>New or gently used textbooks, notebooks, and storybooks to sharpen young minds.</p>
                 </div>
-                <a href="https://pages.razorpay.com/receipt"><button class="donate-btn donate-speed">Speed Donate</button></a>
+                
+                <div class="goods-card">
+                    <div class="icon-circle">🎒</div>
+                    <h3>School Gear</h3>
+                    <p>Backpacks and school kits that give children the dignity they deserve in the classroom.</p>
+                </div>
+
+                <div class="goods-card">
+                    <div class="icon-circle">👕</div>
+                    <h3>Clothing</h3>
+                    <p>Clean, wearable clothes and uniforms for children aged 4 to 14 years.</p>
+                </div>
+            </div>
+
+            <div class="donation-form-wrapper">
+                <div class="form-visual">
+                    <div class="visual-header">
+                        <img src="{% static 'pahal/icon/favicon.ico' %}" alt="Pahal">
+                        <h3>Schedule a Pickup</h3>
+                    </div>
+                    <p>Have clothes, books, or school supplies to give?
+Fill out the form below and our team will coordinate a smooth pickup —
+ensuring your contribution reaches children who truly need it.</p>
+                    <ul class="form-benefits">
+                        <li><i class="fas fa-check-circle"></i> Pickup Within 24 Hours</li>
+                        <li><i class="fas fa-check-circle"></i> Delivered Directly to Beneficiary Children</li>
+                        <li><i class="fas fa-check-circle"></i> Complete Transparency & Impact Updates</li>
+                    </ul>
+                </div>
+
+<div class="form-container">
+<form id="donationForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="74f4af6b-6930-4533-81d6-525d3b8dda58">
+
+        <input type="hidden" name="subject" value="New Donation Request - Pahal Foundation">
+
+        <div class="form-row">
+            <div class="input-group">
+                <label><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" name="Full Name" placeholder="Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" name="Email" placeholder="Your Email Address" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-tasks"></i> Select Items for Donation</label>
+            <div class="custom-checkbox-grid">
+
+                <label class="checkbox-item">
+                    <input type="checkbox" name="Items" value="Books">
+                    <span class="box">Books</span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" name="Items" value="Bags">
+                    <span class="box">Bags</span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" name="Items" value="Clothes">
+                    <span class="box">Clothes</span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" name="Items" value="Toys">
+                    <span class="box">Toys</span>
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" name="Items" value="Other">
+                    <span class="box">Other</span>
+                </label>
+
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-pencil-alt"></i> Pickup Address & Quantity</label>
+            <textarea name="Pickup Details" rows="3"
+                placeholder="Please mention your location and a brief list of items..."
+                required></textarea>
+        </div>
+
+        <button type="submit" class="pahal-btn">
+            Submit Request <i class="fas fa-paper-plane"></i>
+        </button>
+
+    </form>
+</div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="contact-info">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-phone"></i> +91 XXXXXXXXXX</p>
-                <p><i class="fas fa-envelope"></i> pahalkids@gmail.com</p>
-            </div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+<footer class="main-footer">
+    <div class="footer-wrapper container">
+
+        <!-- Column 1 -->
+        <div class="footer-col">
+            <h2 class="footer-logo">Pahal Foundation VITB</h2>
+            <p class="footer-desc">
+                Creating equal opportunities through education, compassion,
+                and meaningful community engagement.
+            </p>
+
+            <div class="footer-social">
+                <a href="mailto:pahalkids@gmail.com"><i class="fas fa-envelope"></i></a>
                 <a href="https://www.instagram.com/pahalfoundation_vitb/"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
-    </footer>
 
-    <script src="{% static 'pahal/js/main.js' %}"></script>
+        <!-- Column 2 -->
+        <div class="footer-col">
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/blogs">Forum</a></li>
+                <li><a href="/volunteer">Volunteer</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/donate">Donate</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3 -->
+<div class="footer-col">
+    <h3>Reach Us</h3>
+
+    <p>
+        <i class="fas fa-map-marker-alt"></i>
+        <a href="https://www.google.com/maps/place/VIT+Bhopal+University/"
+           target="_blank"
+           class="footer-link">
+           VIT Bhopal University, India
+        </a>
+    </p>
+
+    <p>
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:pahalkids@gmail.com" class="footer-link">
+            pahalkids@gmail.com
+        </a>
+    </p>
+
+    <p>
+        <i class="fas fa-phone"></i>
+        <a href="tel:+919896800458" class="footer-link">
+            +91 98968 00458
+        </a>
+    </p>
+</div>
+
+        <!-- Column 4 -->
+        <div class="footer-col">
+            <h3>Our Vision</h3>
+            <p>
+                We believe every child deserves access to education.
+                Together, we nurture dreams and build brighter futures.
+            </p>
+            <a href="/volunteer" class="footer-btn">Join Us</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Pahal Foundation. All rights reserved.</p>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</a>
+ <script src="{% static 'pahal/js/main.js' %}"></script>
 </body>
 </html>

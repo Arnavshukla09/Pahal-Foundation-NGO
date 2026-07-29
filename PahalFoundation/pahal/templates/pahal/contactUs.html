@@ -4,145 +4,422 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'pahal/css/contact-styles.css' %}">
     <main>
-        <section class="contact-info">
-            <div class="container">
-                <h2 class="section-title">Contact Information</h2>
-                <div class="info-grid">
-                    <div class="info-card scroll-reveal">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>Address</h3>
-                        <p>466114 Kotri Kalan, Ashta, Bhopal, Madhya Pradesh, India</p>
-                    </div>
-                    <div class="info-card scroll-reveal">
-                        <i class="fas fa-phone"></i>
-                        <h3>Phone</h3>
-                        <p>+91 xxxxx xxxxx</p>
-                        <p>+91 xxxxx xxxxx</p>
-                    </div>
-                    <div class="info-card scroll-reveal">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
-                        <p>pahalkids@gmail.com</p>
-                        <p>achourey09@gmail.com</p>
-                    </div>
-                    <div class="info-card scroll-reveal">
-                        <i class="fas fa-clock"></i>
-                        <h3>Working Hours</h3>
-                        <p>Monday - Friday: 9AM - 6PM</p>
-                        <p>Saturday: 10AM - 4PM</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- ================= HERO SECTION ================= -->
+<section class="contact-hero">
+    <div class="hero-overlay"></div>
+    <img src="{% static 'pahal/img/c1.jpg' %}" class="hero-bg">
 
-        <section class="contact-form">
-            <div class="container">
-                <h2 class="section-title">Send Us a Message</h2>
-                <div>
-                    {% if messages %}
-                    <div>
-                        {% for message in messages %}
-                        {{message}}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-                <form id="contact-form" method="post" class="scroll-reveal">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="fullname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn submit-btn">Send Message</button>
-                </form>
-            </div>
-        </section>
+    <div class="hero-content">
+        <h1>We’d Love To Hear From You</h1>
+        <p>Your voice matters. Whether you want to volunteer, donate, collaborate, or simply ask a question — we are here for you.</p>
+    </div>
+</section>
 
-        <section class="team-section">
-            <div class="container">
-                <h2 class="section-title">Meet Our Development Team</h2>
-                <div class="team-grid">
-                    <div class="team-member scroll-reveal">
-                        <div class="member-image">
-                            <img src="{% static 'pahal/img/dev1.jpg' %}" alt="Akshat Chourey">
-                        </div>
-                        <h3>Akshat Chourey</h3>
-                        <p>Lead Developer</p>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/akshat-chourey-203011280/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://github.com/Akshatchourey" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member scroll-reveal">
-                        <div class="member-image">
-                            <img src="{% static 'pahal/img/dev2.jpeg' %}" alt="Rudra Gupta">
-                        </div>
-                        <h3>Rudra Gupta</h3>
-                        <p>Project Head</p>
-                        <div class="social-links">
-                            <a href="https://in.linkedin.com/in/rudrag23/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://github.com/Rudragupta23" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member scroll-reveal">
-                        <div class="member-image">
-                            <img src="{% static 'pahal/img/dev3.jpeg' %}" alt="Vanshika Dhaka">
-                        </div>
-                        <h3>Vanshika Dhaka</h3>
-                        <p>Frontend Developer</p>
-                        <div class="social-links">
-                            <a href="https://in.linkedin.com/in/vanshika-dhaka-1b5ab82b2" target="_blank"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://github.com/VANSHIKADHAKA" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member scroll-reveal">
-                        <div class="member-image">
-                            <img src="{% static 'pahal/img/dev5.jpg' %}" alt="Rudra Gupta">
-                        </div>
-                        <h3>Manas R Chavan</h3>
-                        <p>Lead Frontend</p>
-                        <div class="social-links">
-                            <a href="www.linkedin.com/in/manas-chavan-b748402a5" target="_blank"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://github.com/ManasXakistis" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-member scroll-reveal">
-                        <div class="member-image">
-                            <img src="{% static 'pahal/img/dev4.jpg' %}" alt="Rudra Gupta">
-                        </div>
-                        <h3>Shorya Pathak</h3>
-                        <p>UX/UI Developer</p>
-                        <div class="social-links">
-                            <a href="https://in.linkedin.com/in/shorya-pathak-a8950228a" target="_blank"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ================= PREMIUM CONTACT INFORMATION ================= -->
 
-        <section class="map-section" style="text-align:center; align-item:center;">
-        <div class="container">
-            <h2 class="section-title">Find Us</h2>
-            <a href="https://maps.google.com/maps?q=VIT+Bhopal+University,+Kotri+Kalan,+Ashta,+Near+Indore+Road,+Bhopal,+Madhya+Pradesh+466114"><button class="btn">Find Coordinates</button></a>
-            <div id="map" class="scroll-reveal"></div>
+<section class="contact-info-section">
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="contact-header">
+            <span class="section-tag">Let’s Connect</span>
+            <h2 class="animated-title">
+                Get In Touch With Us
+            </h2>
+            <div class="title-underline"></div>
+
+            <p>
+                We love building meaningful connections. Whether you want to
+                volunteer, donate, collaborate, or simply ask a question —
+                we are always here to support you.
+            </p>
         </div>
-    </section>
+
+        <!-- CARDS -->
+        <div class="info-grid">
+
+            <div class="info-card">
+                <div class="icon-circle">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Visit Our Campus</h3>
+                <p>
+                    VIT Bhopal University<br>
+                    Kotri Kalan, Ashta<br>
+                    Madhya Pradesh, India
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-circle">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3>Call Us Anytime</h3>
+                <p>+91 98968 00458</p>
+                <p>+91 99930 41293</p>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-circle">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Send an Email</h3>
+                <p>pahalkids@gmail.com</p>
+                <p>23rudragupta@gmail.com</p>
+            </div>
+
+            <div class="info-card">
+                <div class="icon-circle">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Working Hours</h3>
+                <p>Mon – Fri: 9AM – 5PM</p>
+                <p>Saturday: 10AM – 4PM</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= SEND US A MESSAGE ================= -->
+
+<section class="message-section">
+    <div class="container">
+
+        <div class="message-box">
+
+            <!-- LEFT SIDE TEXT -->
+            <div class="message-content">
+                <h2>Let’s Connect & Make Impact Together</h2>
+
+                <p>
+                    Whether you want to volunteer, collaborate, sponsor a child,
+                    or simply ask a question — we would love to hear from you.
+                </p>
+
+                <p class="message-highlight">
+                    Our team responds within 24 hours.
+                    Your message matters to us.
+                </p>
+            </div>
+
+            <!-- RIGHT SIDE FORM -->
+            <form id="contact-form" method="post" class="message-form">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <input type="text" name="fullname" placeholder="Your Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="subject" placeholder="Subject" required>
+                </div>
+
+                <div class="form-group">
+                    <textarea name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    Send Message <i class="fas fa-paper-plane"></i>
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</section>
+<!-- ================= TEAM SECTION ================= -->
+
+<section class="dev-team-section">
+    <div class="container">
+
+        <div class="dev-team-box">
+
+            <div class="team-header">
+   <h2>About the Developer</h2>
+    <p>
+        Designed and developed the complete Pahal Foundation platform.
+    </p>
+</div>
+
+            <div class="team-vertical">
+
+                <!-- RUDRA -->
+                <div class="team-row">
+                    <div class="team-image" onclick="openModal('modal-rudra')">
+                        <img src="{% static 'pahal/img/dev1.jpeg' %}" alt="Rudra Gupta">
+                        <div class="image-overlay">Click for more info</div>
+                    </div>
+
+                    <div class="team-details">
+                        <h3>Rudra Gupta</h3>
+                        <p class="role">Lead Developer</p>
+                        <div class="social-links">
+                            <a href="https://in.linkedin.com/in/rudrag23/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/Rudragupta23" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VANSH -->
+                <!-- <div class="team-row">
+                    <div class="team-image" onclick="openModal('modal-vansh')">
+                        <img src="{% static 'pahal/img/dev3.jpeg' %}" alt="Vansh Arora">
+                        <div class="image-overlay">Click for more info</div>
+                    </div>
+
+                    <div class="team-details">
+                        <h3>Vansh Arora</h3>
+                        <p class="role">Project Head</p>
+                        <div class="social-links">
+                            <a href="https://in.linkedin.com/in/vansh-arora-702258254/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/Varora-24" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- ARNAV -->
+                <!-- <div class="team-row">
+                    <div class="team-image" onclick="openModal('modal-arnav')">
+                        <img src="{% static 'pahal/img/dev2.jpeg' %}" alt="Arnav Shukla">
+                        <div class="image-overlay">Click for more info</div>
+                    </div>
+
+                    <div class="team-details">
+                        <h3>Arnav Shukla</h3>
+                        <p class="role">Frontend Developer</p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/arnav-shukla-19615128a/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/Arnavshukla09" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- MANAS -->
+                <!-- <div class="team-row">
+                    <div class="team-image" onclick="openModal('modal-manas')">
+                        <img src="{% static 'pahal/img/dev4.jpg' %}" alt="Manas Chavan">
+                        <div class="image-overlay">Click for more info</div>
+                    </div>
+
+                    <div class="team-details">
+                        <h3>Manas R Chavan</h3>
+                        <p class="role">Backend Developer</p>
+                        <div class="social-links">
+                            <a href="https://in.linkedin.com/in/manas-chavan-b748402a5" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/ManasXakistis" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- BHOOMI -->
+                <!-- <div class="team-row">
+                    <div class="team-image" onclick="openModal('modal-bhoomi')">
+                        <img src="{% static 'pahal/img/dev5.jpeg' %}" alt="Bhoomi Amlani">
+                        <div class="image-overlay">Click for more info</div>
+                    </div>
+
+                    <div class="team-details">
+                        <h3>Bhoomi Amlani</h3>
+                        <p class="role">UI/UX Designer</p>
+                        <div class="social-links">
+                            <a href="https://in.linkedin.com/in/bhoomi-amlani-702258254/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/BhoomiAmlani" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- SHUBH -->
+                <!-- <div class="team-row">
+                    <div class="team-image" onclick="openModal('modal-shubh')">
+                        <img src="{% static 'pahal/img/dev6.jpeg' %}" alt="Shubh Agarwal">
+                        <div class="image-overlay">Click for more info</div>
+                    </div>
+
+                    <div class="team-details">
+                        <h3>Shubh Agarwal</h3>
+                        <p class="role">Research & Development</p>
+                        <div class="social-links">
+                            <a href="https://in.linkedin.com/in/shubh-agarwal-702258254/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/ShubhAgarwal23" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= TEAM MODALS ================= -->
+
+{% comment %} RUDRA {% endcomment %}
+<div id="modal-rudra" class="custom-modal">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('modal-rudra')">&times;</span>
+        <img src="{% static 'pahal/img/dev1.jpeg' %}">
+        <h2>Rudra Gupta</h2>
+       <h4>Lead Developer</h4>
+<p>B.Tech CSE Student, VIT Bhopal University</p>
+<p>
+Designed and developed the complete Pahal Foundation platform, including frontend development, backend development, database integration, payment gateway integration, and deployment.
+</p>
+    </div>
+</div>
+
+<!-- {% comment %} VANSH {% endcomment %}
+<div id="modal-vansh" class="custom-modal">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('modal-vansh')">&times;</span>
+        <img src="{% static 'pahal/img/dev3.jpeg' %}">
+        <h2>Vansh Arora</h2>
+        <h4>B.Tech AI – 3rd Year</h4>
+        <p>Reg: 23BAI10638</p>
+        <p>System architecture design and overall project leadership.</p>
+    </div>
+</div>
+
+{% comment %} ARNAV {% endcomment %}
+<div id="modal-arnav" class="custom-modal">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('modal-arnav')">&times;</span>
+        <img src="{% static 'pahal/img/dev2.jpg' %}">
+        <h2>Arnav Shukla</h2>
+        <h4>B.Tech CSE – 3rd Year</h4>
+        <p>Reg: 23BCE10173</p>
+        <p>Frontend UI design and responsive layout implementation.</p>
+    </div>
+</div>
+
+{% comment %} MANAS {% endcomment %}
+<div id="modal-manas" class="custom-modal">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('modal-manas')">&times;</span>
+        <img src="{% static 'pahal/img/dev4.jpg' %}">
+        <h2>Manas R Chavan</h2>
+        <h4>B.Tech CSE – 3rd Year</h4>
+        <p>Reg: 23BCE11812</p>
+        <p>Backend development using Django and server-side logic.</p>
+    </div>
+</div>
+
+{% comment %} BHOOMI {% endcomment %}
+<div id="modal-bhoomi" class="custom-modal">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('modal-bhoomi')">&times;</span>
+        <img src="{% static 'pahal/img/dev5.jpeg' %}">
+        <h2>Bhoomi Amlani</h2>
+        <h4>B.Tech Aerospace – 3rd Year</h4>
+        <p>Reg: 23BAS10118</p>
+        <p>Documentation, presentation design, and UI/UX support.</p>
+    </div>
+</div>
+
+{% comment %} SHUBH {% endcomment %}
+<div id="modal-shubh" class="custom-modal">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeModal('modal-shubh')">&times;</span>
+        <img src="{% static 'pahal/img/dev6.jpeg' %}">
+        <h2>Shubh Agarwal</h2>
+        <h4>B.Tech AI – 3rd Year</h4>
+        <p>Reg: 23BAI10057</p>
+        <p>Research and NGO requirement analysis.</p>
+    </div>
+</div> -->
+
+<!-- ================= FIND US SECTION ================= -->
+
+<section class="find-us-section">
+    <div class="container">
+
+        <div class="find-us-box">
+
+            <div class="find-header">
+                <h2>Find Us</h2>
+                <p>
+                    Visit us at our campus location. We welcome volunteers,
+                    collaborators, and supporters who wish to make a difference.
+                </p>
+            </div>
+
+            <div class="find-content">
+
+                <!-- LEFT SIDE INFO CARD -->
+                <div class="location-card">
+
+                    <div class="location-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+
+                    <h3>Pahal Foundation – VIT Bhopal University</h3>
+
+                    <p>
+                        Kotri Kalan, Ashta<br>
+                        Near Indore Road<br>
+                        Bhopal, Madhya Pradesh – 466114
+                    </p>
+<div class="location-buttons">
+    <a href="https://www.google.com/maps/dir/?api=1&destination=VIT+Bhopal+University+Kotri+Kalan+Ashta"
+       target="_blank" class="btn-primary">
+        Get Directions
+    </a>
+
+    <a href="https://www.google.com/maps/search/?api=1&query=VIT+Bhopal+University+Kotri+Kalan+Ashta"
+       target="_blank" class="btn-secondary">
+        Open in Google Maps
+    </a>
+</div>
+
+                </div>
+
+                <!-- RIGHT SIDE MAP -->
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps?q=VIT+Bhopal+University,+Kotri+Kalan,+Ashta&output=embed"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
     </main>
 {% endblock body %}

@@ -1,131 +1,214 @@
 {% extends 'pahal/base.html' %}
-{% block title %} volunteers - Pahal Foundation {% endblock title %}
+{% block title %} Join the Pahal Movement | VIT Bhopal {% endblock title %}
 {% block body %}
 {% load static %}
+
 <link rel="stylesheet" href="{% static 'pahal/css/volunteer-styles.css' %}">
-    <header class="hero">
-        <div class="slider-wrapper">
-            <div class="text-overlay">
-                <h1 class="fade-in">Join Our Cause</h1>
-                <p class="fade-in">Make a difference in your community by volunteering with Pahal Foundation</p>
-            </div>
-            <div class="slider">
-                <div class="slide"><img src="{% static 'pahal/img/imgVol3.jpg' %}" alt="Children making peace signs"></div>
-                <div class="slide"><img src="{% static 'pahal/img/imgVol1.jpg' %}" alt="Children sitting together"></div>
-                <div class="slide"><img src="{% static 'pahal/img/imgVol2.jpg' %}" alt="Students in uniforms"></div>
-            </div>
-        </div>
-    </header>
-    <main>
-        <section class="volunteer-intro">
-            <div class="container">
-                <h2 class="section-title">Why Volunteer with Us?</h2>
-                <div class="reasons-grid">
-                    <div class="reason-card scroll-reveal">
-                        <i class="fas fa-hands-helping"></i>
-                        <h3>Make an Impact</h3>
-                        <p>Directly contribute to improving lives in your community.</p>
-                    </div>
-                    <div class="reason-card scroll-reveal">
-                        <i class="fas fa-users"></i>
-                        <h3>Build Connections</h3>
-                        <p>Meet like-minded individuals and expand your network.</p>
-                    </div>
-                    <div class="reason-card scroll-reveal">
-                        <i class="fas fa-brain"></i>
-                        <h3>Gain Experience</h3>
-                        <p>Develop new skills and enhance your personal growth.</p>
-                    </div>
-                    <div class="reason-card scroll-reveal">
-                        <i class="fas fa-heart"></i>
-                        <h3>Feel Fulfilled</h3>
-                        <p>Experience the joy of giving back to society.</p>
-                    </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<div class="vol-master-wrapper">
+    <section class="vol-premium-hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="container hero-flex">
+            <div class="hero-text-box animate__animated animate__fadeInLeft">
+                <span class="pill-badge">VOLUNTEER DRIVE 2026</span>
+                <h1>Empowerment <br><span class="gradient-text">Starts With You.</span></h1>
+                <p>Join VIT Bhopal’s most dedicated student-led initiative. We bridge the gap between privilege and opportunity through education.</p>
+                
+                <div class="hero-mini-features">
+                    <div class="h-feat"><i class="fas fa-check-circle"></i> 50+ Active Mentors</div>
+                    <div class="h-feat"><i class="fas fa-university"></i> VIT Bhopal On-Campus Impact</div>
+                    <div class="h-feat"><i class="fas fa-heart"></i> 100% Student-Managed Movement</div>
                 </div>
             </div>
-        </section>
+            
+            <div class="form-star-container animate__animated animate__zoomIn">
+                <div class="form-star-inner">
+                    <div class="form-head">
+                        <div class="form-icon-header"><i class="fas fa-user-plus"></i></div>
+                        <h3>Volunteer Application</h3>
+                        <p>Fill out the details below to start your journey.</p>
+                    </div>
 
-        <section class="volunteer-opportunities">
-            <div class="container">
-                <h2 class="section-title">Make a Difference Today</h2>
-                <div class="mission-text">
-                    <p>Your time and skills can transform lives. Whether you're passionate about education, entertainment, or providing essential support, there's a place for you in our mission.</p>
-                    <p>We're looking for dedicated individuals who want to:</p>
-                    <ul>
-                        <li> ✨ Share their knowledge and expertise</li>
-                        <li> ✨ Bring smiles to children's faces</li>
-                        <li> ✨ Help provide nutritious meals</li>
-                        <li> ✨ Support community development</li>
-                    </ul>
-                    <p class="cta-text">Together, we can create lasting change and build stronger communities.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="volunteer-signup">
-            <div class="container">
-                <h2 class="section-title">Become a Volunteer</h2>
-                <div>
                     {% if messages %}
-                    <div>
-                        {% for message in messages %}
-                        {{message}}
-                        {% endfor %}
+                    <div class="status-msg">
+                        {% for message in messages %}<p>{{message}}</p>{% endfor %}
                     </div>
                     {% endif %}
-                </div>
-                <form id="signup-form" method="post" class="scroll-reveal">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="fullname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="interest">Area of Interest</label>
-                        <select id="interest" name="interestArea" required>
-                            <option value="">Select an option</option>
-                            <option value="teaching">Teaching Assistant</option>
-                            <option value="event">Event Coordinator</option>
-                            <option value="mentoring">Youth Mentor</option>
-                            <option value="admin">Administrative Support</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Why do you want to volunteer?</label>
-                        <textarea id="message" name="about" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn submit-btn">Submit Application</button>
-                </form>
-            </div>
-        </section>
 
-        <section class="volunteer-testimonials">
-            <div class="container">
-                <h2 class="section-title">Volunteer Testimonials</h2>
-                <div class="testimonials-container">
-                    <div class="testimonial scroll-reveal">
-                        <blockquote>
-                            "Volunteering with Pahal Foundation has been an incredibly rewarding experience. I've seen firsthand the positive impact we're making in children's lives."
-                        </blockquote>
-                        <p class="testimonial-author">- Swapnil, Coordinator</p>
+                    <form id="signup-form" method="post" class="star-form-layout">
+                        {% csrf_token %}
+                        <div class="form-grid-row">
+                            <div class="floating-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" name="fullname" placeholder="Full Name" required>
+                            </div>
+                            <div class="floating-group">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" name="phone" placeholder="Phone Number" required>
+                            </div>
+                        </div>
+                        <div class="floating-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" name="email" placeholder="Email Address" required>
+                        </div>
+<div class="floating-group">
+    <i class="fas fa-briefcase"></i>
+    <select id="interest" name="interestArea" required>
+        <option value="" disabled selected>Area of Interest</option>
+        <option value="teaching">Teaching Assistant</option>
+        <option value="event">Event Coordinator</option>
+        <option value="mentoring">Youth Mentor</option>
+        <option value="admin">Media & Creative Support</option>
+        <option value="tech">Web & App Development</option>
+        <option value="content">Content Strategy & Writing</option>
+        <option value="outreach">Community Outreach & PR</option>
+        <option value="logistics">On-Campus Logistics</option>
+    </select>
+</div>
+                        <div class="floating-group">
+                            <textarea name="about" placeholder="What drives you to join the Pahal Foundation?" required></textarea>
+                        </div>
+                        <button type="submit" class="star-submit-btn">
+                            <span>Submit My Application</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header-center">
+                <span class="pill-badge-outline">The Pahal Experience</span>
+                <h2 class="section-title">Why Volunteer With Us?</h2>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="b-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Educational Impact</h3>
+                    <p>Help shape young minds and contribute directly to their foundational education and future literacy.</p>
+                </div>
+                
+                <div class="benefit-card highlighted">
+                    <div class="b-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3>Community Building</h3>
+                    <p>Join a vibrant network of like-minded individuals at VIT Bhopal who share your passion for social change.</p>
+                </div>
+                
+                <div class="benefit-card highlighted">
+                    <div class="b-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Skill Development</h3>
+                    <p>Gain hands-on leadership, organizational, and pedagogical skills through student-managed operations.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="b-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Personal Growth</h3>
+                    <p>Experience the profound joy of giving back and witnessing your direct impact on a child's life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="onboarding-journey">
+        <div class="container">
+            <div class="journey-card">
+                <div class="journey-header">
+                    <h2 class="white-text">Your 3-Step Journey</h2>
+                    <p>Becoming a part of Pahal is simple and transparent.</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-box">
+                        <div class="s-number">01</div>
+                        <h5>Apply</h5>
+                        <p>Complete the application above to register your interest in our mission.</p>
                     </div>
-                    <div class="testimonial scroll-reveal">
-                        <blockquote>
-                            "As an event coordinator, I've had the opportunity to bring the community together and raise awareness for important causes. It's been truly fulfilling."
-                        </blockquote>
-                        <p class="testimonial-author">- Saransh, Event Coordinator</p>
+                    <div class="step-box">
+                        <div class="s-number">02</div>
+                        <h5>Interact</h5>
+                        <p>Attend a 1-on-1 team sync to align your expertise with our needs.</p>
+                    </div>
+                    <div class="step-box">
+                        <div class="s-number">03</div>
+                        <h5>Inspire</h5>
+                        <p>Join our campus sessions and begin your first impact class immediately.</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+<section class="faq-section">
+    <div class="container">
+        <div class="section-header-center">
+            <span class="pill-badge dark">HELP CENTER</span>
+            <h2 class="section-title">Common Questions</h2>
+        </div>
+        
+        <div class="faq-accordion">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Where are classes held?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+<div class="faq-answer">
+    <div class="location-badge">
+        <i class="fas fa-map-marker-alt"></i>
+        <span><strong>Primary Hub:</strong> MPH01 (Directly opposite the Transport Department Office)</span>
+    </div>
+    <p>Our sessions are conducted in a <strong>safe, student-friendly, and highly accessible</strong> environment designed to foster learning for both our students and university mentors.</p>
+</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Who can join as a volunteer?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Any passionate student from VIT Bhopal University can join. Whether you excel in teaching, management, or creative arts, there is a place for you here.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do I need prior teaching experience?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>No prior experience is required! We value your passion and willingness to learn. We provide initial guidance and pair you with senior mentors to help you get started.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>How much time do I need to commit?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Most of our volunteers dedicate <strong>2-4 hours per week</strong>. We understand university schedules are busy, so we work with you to find a slot that fits your timetable.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Are there roles other than teaching?</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Absolutely! You can apply for Event Coordination, Media Support, Content Writing, or On-Campus Logistics. Every role is critical to the foundation's success.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'pahal/js/main.js' %}"></script>
+
+</div>
 {% endblock body %}

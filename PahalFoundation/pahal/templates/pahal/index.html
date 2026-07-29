@@ -2,147 +2,336 @@
 {% block title %} VITB Pahal Foundation {% endblock title %}
 {% block body %}
 {% load static %}
-   <header class="hero">
-        <div class="slider-wrapper">
-            <div class="text-overlay">
-                <h1 class="fade-in">Empowering Communities</h1>
-                <p class="fade-in">Building a better future through education and support</p>
-            </div>
-            <div class="slider">
-                <div class="slide"><img src="{% static 'pahal/img/img1.jpg' %}" alt="Children making peace signs"></div>
-                <div class="slide"><img src="{% static 'pahal/img/img2.jpg' %}" alt="Children sitting together"></div>
-                <div class="slide"><img src="{% static 'pahal/img/img3.jpg' %}" alt="Students in uniforms"></div>
-            </div>
+<header class="hero">
+    <div class="video-wrapper">
+<video muted autoplay loop playsinline id="heroVideo" class="hero-video" poster="{% static 'pahal/img/img1.jpg' %}">
+            <source src="{% static 'pahal/video/main_video.mp4' %}" type="video/mp4">
+        </video>
+        
+        <div class="text-overlay left-align">
+            <h1 class="fade-in">Igniting Minds, <span class="highlight-text">Transforming Lives</span></h1>
+            <p class="fade-in">We empower communities to unlock the potential of every child through innovative education, sustainable mentorship, and joyful learning environments.</p>
+            
+<div class="hero-buttons">
+    <a href="/donate" class="btn primary-btn">Donate Now</a>
+    
+    <a href="/volunteer" class="btn btn-glass">Become a Volunteer</a>
+</div>
         </div>
-    </header>
+
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll for more</span>
+        </div>
+    </div>
+</header>
 
     <main>
-        <section class="mission-section">
-            <div class="container">
-                <h2 class="section-title">Our Mission</h2>
-                <div class="mission-content">
-                    <div class="mission-text scroll-reveal">
-                        <p>At Pahal Foundation, we believe in the power of education to transform lives. Our mission is to provide quality education and support to underprivileged children, ensuring they have the tools and opportunities they need to build a brighter future.</p>
-                        <div class="mission-stats">
-                            <div class="stat">
-                                <span class="counter" data-target="1000">0</span>
-                                <p>Children Supported</p>
-                            </div>
-                            <div class="stat">
-                                <span class="counter" data-target="50">0</span>
-                                <p>Communities Reached</p>
-                            </div>
-                            <div class="stat">
-                                <span class="counter" data-target="10">0</span>
-                                <p>Years of Service</p>
-                            </div>
+<section class="mission-section">
+    <div class="container">
+        <div class="mission-card scroll-reveal">
+            <div class="mission-header-flex">
+                <div class="mission-title-area">
+                    <h2 class="section-title">Our Mission</h2>
+                    <div class="title-underline"></div>
+                </div>
+                
+                <div class="mission-image">
+                    <img src="{% static 'pahal/img/j4.webp' %}" alt="Pahal Mission Activity">
+                </div>
+            </div>
+            
+            <div class="mission-content">
+                <div class="mission-text">
+                    <p>At Pahal Foundation, we believe in the power of education to transform lives. Our mission is to provide quality education and support to underprivileged children, ensuring they have the tools and opportunities they need to build a brighter future.</p>
+                    
+                    <div class="mission-stats">
+                        <div class="stat">
+                            <span class="counter" data-target="80+">0</span>
+                            <p>School Ready Children</p>
+                        </div>
+                        <div class="stat">
+                            <span class="counter" data-target="200+">0</span>
+                            <p>Lives Impacted</p>
+                        </div>
+                        <div class="stat">
+                            <span class="counter" data-target="50+">0</span>
+                            <p>Passionate Volunteers</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <section class="values-section">
-            <div class="container">
-                <h2 class="section-title">Our Values</h2>
-                <div class="values-grid">
-                    <div class="value-card scroll-reveal">
-                        <i class="fas fa-heart"></i>
-                        <h3>Compassion</h3>
-                        <p>We lead with empathy and understanding in everything we do.</p>
-                    </div>
-                    <div class="value-card scroll-reveal">
-                        <i class="fas fa-hands-helping"></i>
-                        <h3>Community</h3>
-                        <p>Building strong relationships and fostering community growth.</p>
-                    </div>
-                    <div class="value-card scroll-reveal">
-                        <i class="fas fa-book-reader"></i>
-                        <h3>Education</h3>
-                        <p>Providing quality education as a foundation for success.</p>
-                    </div>
-                    <div class="value-card scroll-reveal">
-                        <i class="fas fa-seedling"></i>
-                        <h3>Growth</h3>
-                        <p>Nurturing potential and fostering continuous development.</p>
-                    </div>
+
+<section class="values-section">
+    <div class="container">
+        <h2 class="section-title">Our Core Values</h2>
+        <div class="title-underline"></div> <div class="values-grid">
+            <div class="value-card scroll-reveal">
+                <div class="card-icon-wrapper">
+                    <i class="fas fa-heart"></i>
                 </div>
+                <h3>Compassion</h3>
+                <p>We lead with empathy and understanding, ensuring every child feels seen, heard, and valued in their journey.</p>
+                <div class="card-accent"></div>
             </div>
-        </section>
 
-        <section class="team-section">
-            <div class="container">
-                <h2 class="section-title">Our Team</h2>
-                <div class="team-grid">
-                    <div class="team-member scroll-reveal">
-                        <div class="member-image">
-                            <img src="{% static 'pahal/img/sumit_sir.jpeg' %}" alt="Team Member">
-                        </div>
-                        <h3>Sumit Sir</h3>
+            <div class="value-card scroll-reveal">
+                <div class="card-icon-wrapper">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3>Community</h3>
+                <p>Building a family-like bond where volunteers and children grow together through shared trust and support.</p>
+                <div class="card-accent"></div>
+            </div>
+
+            <div class="value-card scroll-reveal">
+                <div class="card-icon-wrapper">
+                    <i class="fas fa-book-reader"></i>
+                </div>
+                <h3>Education</h3>
+                <p>Providing more than just literacy; we ignite curiosity and provide the tools for lifelong learning and success.</p>
+                <div class="card-accent"></div>
+            </div>
+
+            <div class="value-card scroll-reveal">
+                <div class="card-icon-wrapper">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>Growth</h3>
+                <p>Nurturing the raw potential of every student to foster continuous development of both character and skill.</p>
+                <div class="card-accent"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="team-section">
+    <div class="container">
+
+        <div class="team-box-frame scroll-reveal">
+            <h2 class="section-title">Our Team</h2>
+
+            <div class="team-grid">
+
+                <!-- SUMIT -->
+                <div class="team-member">
+                    <label for="modal-sumit" class="member-click-area">
+<div class="member-image">
+    <img src="{% static 'pahal/img/sumit_sir.jpeg' %}" alt="Sumit Mittal">
+    <div class="click-overlay">
+        Click to View Profile
+    </div>
+</div>
+                        <h3>Dr. Sumit Mittal</h3>
                         <p>Founder & Director</p>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/sumitmittal15/"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://www.instagram.com/sumit_49/"><i class="fab fa-instagram"></i></a>
-                        </div>
+                    </label>
+
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/sumitmittal15/"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/sumit_49/"><i class="fab fa-instagram"></i></a>
                     </div>
-                    <div class="team-member scroll-reveal">
+                </div>
+                
+                <!-- NIRMALA -->
+                <div class="team-member">
+                    <label for="modal-nirmala" class="member-click-area">
                         <div class="member-image">
-                            <img src="{% static 'pahal/img/nirmala_mam.jpeg' %}" alt="Team Member">
+                            <img src="{% static 'pahal/img/nirmala_mam.jpeg' %}" alt="E. Nirmala">
+                            <div class="click-overlay">
+                                Click to View Profile
+                            </div>
                         </div>
-                        <h3>E.Nirmala mam</h3>
+                        <h3>Dr. E. Nirmala</h3>
                         <p>Education Director</p>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
+                    </label>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="timeline-section">
-            <div class="container">
-                <h2 class="section-title">Our Journey</h2>
-                <div class="timeline">
-                    <div class="timeline-item scroll-reveal">
-                        <div class="timeline-content">
-                            <h3>2025</h3>
-                            <p>We had our best Saraswati Puja</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item scroll-reveal">
-                        <div class="timeline-content">
-                            <h3>2024</h3>
-                            <p>2024 batch volunteer's first meetup</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item scroll-reveal">
-                        <div class="timeline-content">
-                            <h3>2024</h3>
-                            <p>E.Nirmala mam distributed food</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item scroll-reveal">
-                        <div class="timeline-content">
-                            <h3>2023</h3>
-                            <p>We start of our journey on Dec 2023</p>
-                        </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<input type="checkbox" id="modal-sumit" class="modal-state">
+<input type="checkbox" id="modal-nirmala" class="modal-state">
+
+<!-- SUMIT MODAL -->
+<div class="modal-overlay modal-sumit-view">
+    <div class="modal-content">
+        <label for="modal-sumit" class="close-modal">&times;</label>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img src="{% static 'pahal/img/sumit_sir.jpeg' %}">
+            </div>
+            <div class="modal-text">
+                <h2>Dr. Sumit Mittal</h2>
+                <h4>Senior Assistant Professor</h4>
+                <div class="modal-separator"></div>
+                <p>Dr. Sumit Mittal completed his Ph.D. in Computational chemistry from Max-Planck-Institute für Kohlenforschung, Germany. Prior to this, he completed a 5-year Integrated BS-MS program in Chemistry from IISER Mohali, India. He has many publications in reputed International journals. His research focuses on applications of multi-scale molecular modelling and large-scale computer simulations to gain insights into the structural properties of biological systems, such as protein-ligand interactions, protein-protein interactions involved in neurological diseases.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NIRMALA MODAL -->
+<div class="modal-overlay modal-nirmala-view">
+    <div class="modal-content">
+        <label for="modal-nirmala" class="close-modal">&times;</label>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img src="{% static 'pahal/img/nirmala_mam.jpeg' %}">
+            </div>
+            <div class="modal-text">
+                <h2>Dr. E. Nirmala</h2>
+                <h4>Senior Assistant Professor</h4>
+                <div class="modal-separator"></div>
+                <p>Dr. E. Nirmala received her doctorate from Anna University in Chennai, Madras Institute of Technology Campus. She has been a teacher in the academic profession for more than 18 years. Worked as an assistant professor, associate professor, and HOD for numerous institutions. She is an expert in big data analytics, cloud security, and layered security. She is currently working on a project to protect people in Assam's drowning river water with a team of students. She has led numerous faculty development programmes and seminars funded by ISTE and Anna University.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="timeline-section">
+    <div class="container">
+
+        <div class="journey-box">
+
+            <h2 class="section-title">Our Journey</h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-dot">2021</div>
+                    <div class="timeline-content">
+                        <p>Founded by Ph.D. scholars, PAHAL established the core structure of community teaching, creating a safe and nurturing space for children to learn and grow.</p>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content scroll-reveal">
-                    <h2>Join Us in Making a Difference</h2>
-                    <p>Together, we can create positive change in our communities.</p>
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-dot">2022</div>
+                    <div class="timeline-content">
+                        <p>The Batch of 2022 formalized academic sessions and strengthened volunteer participation, making the initiative more structured and consistent.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-dot">2023</div>
+                    <div class="timeline-content">
+                        <p>Expanded outreach through colony visits and awareness drives, successfully bringing more children into mainstream education.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-dot">2024</div>
+                    <div class="timeline-content">
+                        <p>Introduced activity-based learning and the first PAHAL Carnival, celebrating joy while inspiring the next cohort.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-dot">2025</div>
+                    <div class="timeline-content">
+                        <p>Institutionalized impact through digital literacy and sustainable mentorship, bridging the gap between education and modern skills.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-card scroll-reveal">
+            
+            <div class="cta-image-top">
+                <img src="{% static 'pahal/img/img4.webp' %}" alt="PAHAL Foundation Activity">
+            </div>
+            
+            <div class="cta-grid">
+                <div class="cta-left">
+                    <h2 class="cta-title">Not Just a Project, It's a Movement</h2>
+                    <div class="title-underline"></div>
+                    <p class="cta-description">
+                        What started as a simple idea on our campus has grown into a family built on trust and shared learning. At PAHAL, we don't just teach; we bond. Our volunteers aren't just student-teachers—they are big brothers, sisters, and mentors who walk alongside these children to spark curiosity and build character.
+                    </p>
                     <div class="cta-buttons">
-                        <a href="/donate" class="btn primary-btn">Donate Now</a>
-                        <a href="/volunteer" class="btn secondary-btn">Volunteer</a>
+                        <a href="/donate" class="btn primary-btn">Support the Cause</a>
+                        <a href="/volunteer" class="btn secondary-btn">Join the Family</a>
                     </div>
                 </div>
+
+                <div class="cta-right">
+                    <h3 class="road-ahead-title">Our Vision for 2026</h3>
+                    <ul class="roadmap-list">
+                        <li class="roadmap-item">
+                            <span class="number-circle">1</span>
+                            <span>Create more "learning through play" experiences</span>
+                        </li>
+                        <li class="roadmap-item">
+                            <span class="number-circle">2</span>
+                            <span>Reach more children in nearby labor colonies</span>
+                        </li>
+                        <li class="roadmap-item">
+                            <span class="number-circle">3</span>
+                            <span>Inspire every student on campus to serve with heart</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+<section style="
+    background: #f2f0d5;
+    padding: 140px 20px;
+    text-align: center;
+">
+
+    <div style="max-width: 900px; margin: auto;">
+
+        <!-- Decorative Quote -->
+        <div style="
+            font-size: 100px;
+            color: #0e7c86;
+            line-height: 1;
+            margin-bottom: 40px;
+            font-family: Georgia, serif;
+        ">
+            ❝
+        </div>
+
+        <!-- Main Quote -->
+        <p style="
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3rem;
+            color: #111;
+            line-height: 1.8;
+            margin-bottom: 30px;">
+            The smallest effort can ignite
+            the greatest transformation.
+        </p>
+
+        <p style="
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3rem;
+            color: #111;
+            line-height: 1.8;">
+            Show up. Care deeply. Change lives.
+        </p>
+
+    </div>
+
+</section>
     </main>
 {% endblock body %}

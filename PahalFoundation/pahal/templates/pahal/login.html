@@ -4,41 +4,62 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Login - Pahal Foundation</title>
+    <title>Teacher Login | Pahal Foundation</title>
+    
     <link rel="stylesheet" href="{% static 'pahal/css/login-styles.css' %}">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="icon" type="image/icon" href="{% static 'pahal/icon/favicon.ico' %}">
+
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <div>
-                {% if messages %}
-                <div>
-                    {% for message in messages %}
-                    {{message}}
-                    {% endfor %}
+    
+    <div class="login-master-wrapper">
+        <div class="hero-bg-overlay"></div>
+        
+        <div class="container">
+            <div class="login-star-container animate__animated animate__zoomIn">
+                <div class="login-star-inner">
+                    
+                    <div class="form-head">
+                        <div class="form-icon-header"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <h3>Teacher Portal</h3>
+                        <p>Welcome back, Educator. Please log in to continue.</p>
+                    </div>
+
+                    {% if messages %}
+                    <div class="status-msg-box">
+                        {% for message in messages %}
+                        <p class="status-msg {{ message.tags }}"><i class="fas fa-info-circle"></i> {{message}}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" id="login-form" class="star-form-layout">
+                        {% csrf_token %}
+                        
+                        <div class="floating-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" name="username" required placeholder="Username">
+                        </div>
+                        
+                        <div class="floating-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" required placeholder="Password">
+                        </div>
+                        
+                        <button type="submit" class="star-submit-btn">
+                            <span>Access Dashboard</span>
+                            <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                    </form>
+
+                    <div class="login-footer">
+                        <p>New to the foundation? <a href="/register/" class="gradient-link">Sign Up Here</a></p>
+                    </div>
                 </div>
-                {% endif %}
-            </div>
-            <h1>Login</h1>
-            <form method="POST" id="login-form">
-                {% csrf_token %}
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="username" name="username" required placeholder="Username">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" name="password" required placeholder="Password">
-                </div>
-                <button type="submit" class="btn primary-btn">Login</button>
-            </form>
-            <div class="links">
-<!--                <a href="forgot-password.html">Forgot Password?</a>-->
-                <a href="/register/">New Teacher? Sign Up</a>
             </div>
         </div>
     </div>
-<!--    <script src="login.js"></script>-->
 </body>
 </html>
