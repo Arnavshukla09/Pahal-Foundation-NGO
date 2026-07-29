@@ -39,9 +39,9 @@ Pahal Foundation is a non-profit organization committed to empowering underprivi
 
 * **Backend:** Python, Django
 * **Frontend:** HTML, CSS, JavaScript
-* **Database:** MySQL (Aiven Cloud)
-* **File Storage:** AWS S3 for media files
-* **Payment Gateway:** RazorPay
+* **Database:** SQLite (Configured to run in `/tmp` for Vercel's Serverless environment)
+* **File Storage:** AWS S3 for media files (Optional/Configurable)
+* **Payment Gateway:** RazorPay (Optional/Configurable)
 * **Deployment:** Git, GitHub, **Vercel**
 
 ## 📂 Project Structure
@@ -50,67 +50,59 @@ The project is organized into two main Django apps: `pahal` for the public-facin
 
 ```
 Pahal-Foundation-NGO/
-├── .gitignore
 ├── .env.example
+├── .gitignore
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
-├── PahalFoundation/
-│   ├── vercel.json
-│   ├── build_files.sh
-│   ├── manage.py
-│   ├── requirements.txt
-│   ├── PahalFoundation/
-│   │   ├── __init__.py
-│   │   ├── asgi.py
-│   │   ├── ckeditorconfig.py
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   └── wsgi.py
-│   ├── content/
-│   │   ├── models.py
-│   │   ├── views.py
-│   │   ├── views_teacher.py
-│   │   ├── views_videos.py
-│   │   ├── urls.py
-│   │   ├── forms.py
-│   │   ├── static/content/
-│   │   └── templates/content/
-│   └── pahal/
-│       ├── models.py
-│       ├── views.py
-│       ├── urls.py
-│       ├── static/pahal/
-│       └── templates/pahal/
 ├── README.md
+├── build_files.sh
 ├── requirements.txt
-└── screenshots/
+├── vercel.json
+├── screenshots/
+└── PahalFoundation/
+    ├── db.sqlite3
+    ├── manage.py
+    ├── requirements.txt
+    ├── seed_demo_data.py
+    ├── PahalFoundation/
+    │   ├── __init__.py
+    │   ├── asgi.py
+    │   ├── settings.py
+    │   ├── urls.py
+    │   └── wsgi.py
+    ├── content/
+    │   ├── models.py
+    │   ├── views.py
+    │   ├── urls.py
+    │   ├── forms.py
+    │   ├── static/content/
+    │   └── templates/content/
+    └── pahal/
+        ├── models.py
+        ├── views.py
+        ├── urls.py
+        ├── static/pahal/
+        └── templates/pahal/
 ```
 
 ## 🚀 Deploying to Vercel
 
 1. Fork / clone this repository
 2. Go to [vercel.com](https://vercel.com) → New Project → Import from GitHub
-3. Set **Root Directory** to `PahalFoundation`
-4. Add the following **Environment Variables** in Vercel project settings:
+3. Select this repository and do NOT override the Root Directory (keep it as default)
+4. Add the following **Environment Variables** in Vercel project settings (optional depending on your setup):
 
 | Variable | Description |
 |---|---|
 | `DJANGO_SECRET_KEY` | Django secret key |
 | `DEBUG` | Set to `False` |
-| `DB_HOST` | MySQL host (e.g. Aiven) |
-| `DB_NAME` | Database name |
-| `DB_USER_ROOT` | Database user |
-| `DB_PASSWORD_ROOT` | Database password |
-| `DB_PORT` | Database port |
-| `AWS_ACCESS_KEY_ID` | AWS S3 access key |
-| `AWS_SECRET_ACCESS_KEY` | AWS S3 secret key |
-| `AWS_STORAGE_BUCKET_NAME` | S3 bucket name |
-| `RAZORPAY_API_KEY` | Razorpay key |
-| `RAZORPAY_API_SECRET` | Razorpay secret |
+| `AWS_ACCESS_KEY_ID` | AWS S3 access key (optional) |
+| `AWS_SECRET_ACCESS_KEY` | AWS S3 secret key (optional) |
+| `AWS_STORAGE_BUCKET_NAME` | S3 bucket name (optional) |
+| `RAZORPAY_API_KEY` | Razorpay key (optional) |
+| `RAZORPAY_API_SECRET` | Razorpay secret (optional) |
 
 5. Click **Deploy** ✅
-
-See `.env.example` for the full list of required variables.
 
 ## 🤝 Contributing
 
